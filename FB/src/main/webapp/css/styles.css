@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 10, 2015, 8:29:17 PM
+    Author     : Grant
+*/
+
+body {
+    background-color: white;
+}
+
+div {
+    background-color: darkgray;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid darkgreen;
+}
+
+h1, p {
+    text-align: center;
+}
+
+#wrongCredentials {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+form {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+}
