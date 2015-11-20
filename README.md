@@ -1,5 +1,3 @@
 # TeamAwesome
 
-**Team Project Proposal**
-
-**CS 313 Project**
+**CS 313 Team Project**
