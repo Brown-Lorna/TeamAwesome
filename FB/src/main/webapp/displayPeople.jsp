@@ -13,5 +13,12 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-    </body>
+    <c:forEach var="person" items="${people}">
+        <section>
+            <aside>${person.first_name} - ${person.last_name}</aside>
+            <aside>${person.birthay}</aside>
+        </section>
+    </c:forEach>
+
+</body>
 </html>
