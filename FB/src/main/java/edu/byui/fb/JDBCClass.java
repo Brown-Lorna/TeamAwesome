@@ -2,6 +2,8 @@ package edu.byui.fb;
 
 //STEP 1. Import required packages
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,35 +74,64 @@ public class JDBCClass {
     }//end main
 */
     public ResultSet getPeople() {
-        Connection conn = null;
-        Statement stmt = null;
-        String sql = null;
-        ResultSet rs = null;
         try {
-            //connect
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            sql = "SELECT * FROM person;";
-            rs = stmt.executeQuery(sql);
+            Connection conn = null;
+            Statement stmt = null;
+            String sql = null;
+            ResultSet rs = null;
+            try {
+                //connect
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                sql = "SELECT * FROM person;";
+                rs = stmt.executeQuery(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            while (rs.next()) {
+                try {
+                    // Printing results to the console
+                    System.out.println("First Name: <a href=''>" + rs.getString("first_name")
+                            + "<br>Last Name- " + rs.getString("last_name")
+                            + "<br>Birth Date: " + rs.getDate("birthday"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                rs.getString("first_name");
+            } catch (SQLException ex) {
+                Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            List<Person> people = new ArrayList<>();
+            while (rs.next()) {
+                Person person = new Person();
+                person.setFirst_name(rs.getString("first_name"));
+                person.setLast_name(rs.getString("last_name"));
+                person.setId(rs.getInt("id"));
+                person.setBirthday(rs.getDate("birthday"));
+                
+                people.add(person);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
-        return rs;
+        return null;
     }
 
 
