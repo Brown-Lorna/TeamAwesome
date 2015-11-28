@@ -74,12 +74,27 @@ public class JDBCClass {
         } catch (SQLException ex) {
             Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            if(conn != null)
-        }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
-    private void getParents(String child) {
+
+
+private void getParents(String child) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }//end JDBCExample
