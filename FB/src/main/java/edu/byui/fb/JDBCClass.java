@@ -1,13 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author dan
- */
 
 //STEP 1. Import required packages
 import java.sql.*;
@@ -60,5 +51,14 @@ public class JDBCClass {
       }//end finally try
    }//end try
    System.out.println("Goodbye!");
+   
 }//end main
+   
+    private static void getPeople(){
+        
+        
+    }
+    private static void getParents(String child) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }//end JDBCExample
