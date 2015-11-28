@@ -63,14 +63,18 @@ public class JDBCClass {
 
     private void getPeople() {
         Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
         try {
             //connect
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = null;
-            String sql = "SELECT * FROM person;";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT * FROM person;";
+            rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(conn != null)
         }
 
     }
