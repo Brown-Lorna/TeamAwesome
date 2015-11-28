@@ -20,6 +20,11 @@ public class JDBCClass {
     static final String PASS = password;
 
     public JDBCClass() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 /*   public static void main(String[] args) {
@@ -66,7 +71,7 @@ public class JDBCClass {
 
     }//end main
 */
-    public void getPeople() {
+    public ResultSet getPeople() {
         Connection conn = null;
         Statement stmt = null;
         String sql = null;
@@ -95,6 +100,7 @@ public class JDBCClass {
                 Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return rs;
     }
 
 
