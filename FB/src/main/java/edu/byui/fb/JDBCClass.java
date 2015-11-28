@@ -62,10 +62,10 @@ public class JDBCClass {
     }//end main
 
     private void getPeople() {
-
+        Connection conn = null;
         try {
             //connect
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = null;
             String sql = "SELECT * FROM person;";
             ResultSet rs = stmt.executeQuery(sql);
