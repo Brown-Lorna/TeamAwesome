@@ -52,10 +52,26 @@ public class displayPeople extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet displayPeople at " + request.getContextPath() + "</h1>");
-            ResultSet rs = db.getPeople();
-            
+            List people = db.getPeople();
+            while (people.next()) {
+                try {
+                    // Printing results to the console
+                    System.out.println("First Name: <a href=''>" + rs.)
+                            + "<br>Last Name: " + rs.getString("last_name")
+                            + "<br>Birth Date: " + rs.getDate("birthday"));
+                } catch (SQLException ex) {
+                    Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                rs.getString("first_name");
+            } catch (SQLException ex) {
+                Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
+            }
             out.println("</body>");
             out.println("</html>");
+        } catch (SQLException ex) {
+            Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
         }    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

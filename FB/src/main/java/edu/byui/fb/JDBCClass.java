@@ -73,12 +73,13 @@ public class JDBCClass {
 
     }//end main
 */
-    public ResultSet getPeople() {
-        try {
+    public List getPeople() {
+        
             Connection conn = null;
             Statement stmt = null;
             String sql = null;
             ResultSet rs = null;
+            List<Person> people = new ArrayList<>();
             try {
                 //connect
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -103,22 +104,9 @@ public class JDBCClass {
                     Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            while (rs.next()) {
-                try {
-                    // Printing results to the console
-                    System.out.println("First Name: <a href=''>" + rs.getString("first_name")
-                            + "<br>Last Name- " + rs.getString("last_name")
-                            + "<br>Birth Date: " + rs.getDate("birthday"));
-                } catch (SQLException ex) {
-                    Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            try {
-                rs.getString("first_name");
-            } catch (SQLException ex) {
-                Logger.getLogger(displayPeople.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            List<Person> people = new ArrayList<>();
+            
+            
+        try {
             while (rs.next()) {
                 Person person = new Person();
                 person.setFirst_name(rs.getString("first_name"));
@@ -131,7 +119,9 @@ public class JDBCClass {
         } catch (SQLException ex) {
             Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+       
+        return people;
+        
     }
 
 
