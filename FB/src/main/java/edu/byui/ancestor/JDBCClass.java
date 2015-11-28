@@ -1,4 +1,4 @@
-package edu.byui.fb;
+package edu.byui.ancestor;
 
 //STEP 1. Import required packages
 import java.sql.*;
