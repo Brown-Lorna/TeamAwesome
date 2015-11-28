@@ -7,6 +7,7 @@ package edu.byui.fb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "displayPeople", urlPatterns = {"/displayPeople"})
 public class displayPeople extends HttpServlet {
+    
+   
+    JDBCClass db = new JDBCClass();
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +47,8 @@ public class displayPeople extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet displayPeople at " + request.getContextPath() + "</h1>");
-            out.println("")
+            db.
+            out.println("");
             out.println("</body>");
             out.println("</html>");
         }

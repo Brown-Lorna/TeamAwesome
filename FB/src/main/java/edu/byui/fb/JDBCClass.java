@@ -1,3 +1,5 @@
+package edu.byui.fb;
+
 //STEP 1. Import required packages
 import java.sql.*;
 import java.util.logging.Level;
@@ -17,7 +19,10 @@ public class JDBCClass {
     static final String USER = username;
     static final String PASS = password;
 
-    public static void main(String[] args) {
+    public JDBCClass() {
+    }
+
+/*   public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -60,8 +65,8 @@ public class JDBCClass {
         System.out.println("Goodbye!");
 
     }//end main
-
-    private void getPeople() {
+*/
+    public void getPeople() {
         Connection conn = null;
         Statement stmt = null;
         String sql = null;
@@ -94,7 +99,7 @@ public class JDBCClass {
 
 
 
-private void getParents(String child) {
+public void getParents(String child) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }//end JDBCExample
