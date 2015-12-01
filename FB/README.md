@@ -5,7 +5,7 @@
 # Some Reference Material
 
 **JDBC**
-http://www.codejava.net/java-se/jdbc/jdbc-tutorial-sql-insert-select-update-and-delete-examples
+(http://www.codejava.net/java-se/jdbc/jdbc-tutorial-sql-insert-select-update-and-delete-examples)
 http://www.journaldev.com/2471/jdbc-example-tutorial-drivers-connection-statement-resultset
 
 **Facebook4J**
