@@ -5,15 +5,9 @@
  */
 package edu.byui.ancestor;
 
-import edu.byui.ancestor.JDBCClass;
-import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Theriault
+ * @author Grant
  */
-@WebServlet(name = "displayPeople", urlPatterns = {"/displayPeople"})
-public class displayPeople extends HttpServlet {
+@WebServlet(name = "DisplayPerson", urlPatterns = {"/DisplayPerson"})
+public class DisplayPerson extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,11 +32,19 @@ public class displayPeople extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        JDBCClass db = new JDBCClass();
-        List<Person> people = db.getPeople();
-        
-        request.setAttribute("people", people);
-        request.getRequestDispatcher("displayPeople.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DisplayPerson</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DisplayPerson at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +59,16 @@ public class displayPeople extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String firstName = request.getParameter("firstName");
+        String lastName  = request.getParameter("lastName");
+        String birthday  = request.getParameter("birthday");
+        String id        = request.getParameter("id");
+        
+        request.setAttribute("firstName", firstName);
+        request.setAttribute("birthday", birthday);
+        request.setAttribute("lastName", lastName);
+        request.setAttribute("id", id);
+        request.getRequestDispatcher("displayPerson.jsp").forward(request, response);
     }
 
     /**

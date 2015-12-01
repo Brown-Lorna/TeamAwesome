@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>${firstName} ${lastName}</title>
+        
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Displaying ${firstName} ${lastName}'s Information</h1>
+        <div>
+            <p>Birthday: ${birthday}</p>
+        </div>
     </body>
 </html>
