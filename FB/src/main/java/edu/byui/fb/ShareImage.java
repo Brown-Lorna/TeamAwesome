@@ -3,13 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.byui.lesson9activity;
+package edu.byui.fb;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,12 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Grant
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
-    private final String MASTER_USER = "admin";
-    private final String MASTER_PASS = "adminPASS2";
-    private String dataDirectory = System.getenv("OPENSHIFT_DATA_DIR");
-    
+@WebServlet(name = "ShareImage", urlPatterns = {"/ShareImage"})
+public class ShareImage extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,7 +31,19 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Do we need to do anything here?
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ShareImage</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ShareImage at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,15 +72,21 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Create DataBaseHandler
+        // TODO: Create DataBase Handler (DBH)
         
-        // TODO: Check username against Database
+        // TODO: Verify current user
         
-        // TODO: Check password against hashed password in Database
+        // TODO: If user not logged in or user doesn't exist, redirect to index.jsp
         
-        // TODO: If all's good, create session and set session username.
+        // TODO: Create FaceBookHandler (FBH)
         
-        // TODO: Redirect to welcome.jsp or display incorrect credentials information
+        // TODO: Use FBH to let user log into FaceBook and to authorize app with their FaceBook account.
+        
+        // TODO: Use FBH to share the image choosen to their FB page.
+        
+        // TODO: Any failure should redirect to welcome.jsp, with error message
+        
+        // TODO: Redirect to welcome.jsp
     }
 
     /**

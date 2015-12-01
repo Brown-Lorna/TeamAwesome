@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <%!
     int pageCount = 0;
-
+    
     void addCount() {
         pageCount++;
     }
@@ -16,11 +16,13 @@
 <% addCount();%>
 <html>
     <head>
-        <title>Team Awesome Facebook Thing</title>
+        <title><!-- TODO: Dynamically add title --></title>
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
     </head>
     <body>
     <center>
+        <!-- TODO: index.jsp/welcome.jsp (Only if user is logged in) link -->
+        <!-- TODO: logout.jsp link (Only appear if user is logged in) -->
         <h2>Testing Layout</h2>
         <p>This site has been visited <%= pageCount%> times.</p>
     </center>

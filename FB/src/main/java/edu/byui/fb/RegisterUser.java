@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package edu.byui.fb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,15 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.* ;  // for standard JDBC programs
-import java.math.* ; // for BigDecimal and BigInteger support
 
 /**
  *
- * @author dan
+ * @author Grant
  */
-@WebServlet(urlPatterns = {"/db"})
-public class db extends HttpServlet {
+@WebServlet(name = "RegisterUser", urlPatterns = {"/RegisterUser"})
+public class RegisterUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +37,10 @@ public class db extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet db</title>");            
+            out.println("<title>Servlet RegisterUser</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet db at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,7 +72,13 @@ public class db extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // TODO: Create DataBase Handler (DBH)
+        
+        // TODO: Add a user to DB using addUser in DBH.
+        
+        // TODO: Any failure should redirect to index.jsp, with error message
+        
+        // TODO: Redirect to welcome.jsp
     }
 
     /**
