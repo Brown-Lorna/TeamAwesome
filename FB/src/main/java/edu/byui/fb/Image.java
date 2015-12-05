@@ -14,12 +14,25 @@ import java.io.InputStream;
 public class Image {
     private String name;
     private InputStream bytes;
+    private int id;
+    
+    public Image() {
+        
+    }
     
     public Image(String name, InputStream bytes) {
         this.name  = name;
         this.bytes = bytes;
     }
 
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }

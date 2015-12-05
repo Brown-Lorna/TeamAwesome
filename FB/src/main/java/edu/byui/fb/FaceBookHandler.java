@@ -19,7 +19,6 @@ import java.io.InputStream;
 public class FaceBookHandler {
     private static final FaceBookHandler FBH_INSTANCE = new FaceBookHandler();
 
-    private String errorMessage;
     private Facebook facebook;
     private final String APP_ID      = "450092371846757";
     private final String APP_SECRET  = "34d0d6d10639df7ba75b3c847a94dd22";
@@ -28,7 +27,7 @@ public class FaceBookHandler {
     private FaceBookHandler() {
         facebook = new FacebookFactory().getInstance();
         facebook.setOAuthAppId(APP_ID, APP_SECRET);
-//        facebook.setOAuthPermissions(commaSeparetedPermissions);
+//        facebook.setOAuthPermissions(PERMISSIONS);
     }
 
     public static FaceBookHandler getInstance() {
@@ -49,9 +48,5 @@ public class FaceBookHandler {
         statusUpdate.setMessage(message);
         facebook.postPhoto(statusUpdate);
         return true;
-    }
-
-    String getErrorMessage() {
-        return errorMessage;
     }
 }

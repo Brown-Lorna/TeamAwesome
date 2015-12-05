@@ -40,7 +40,7 @@ public class ShareImage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShareImage</title>");            
+            out.println("<title>Servlet ShareImage</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShareImage at " + request.getContextPath() + "</h1>");
@@ -62,38 +62,26 @@ public class ShareImage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get username, image name, and the message to be posted
-        String username     = (String)request.getSession().getAttribute("username");
-        String imageName    = (String)request.getAttribute("image");
-        String message      = (String)request.getAttribute("message");
-        
+        int imageId = (int) request.getAttribute("image");
+        String message = (String) request.getAttribute("message");
+
         // Is there a username on the session
-        if (username != null) {
-            // Get the user from the database
-            DataBaseHandler dbh = new DataBaseHandler();
-            boolean usernameExists = dbh.getUser(username);
+        // Get the user from the database
+        DataBaseHandler dbh = DataBaseHandler.getInstance();
 
-            if (usernameExists) {
-                // Get the image from the database
-                FaceBookHandler fbh = FaceBookHandler.getInstance();
-                Image image = dbh.getImage(imageName);
-                
-                try {
-                    // Share the image on the FaceBook wall
-                    fbh.shareImage(image.getName(), image.getBytes(), message);
-                    request.setAttribute("imageShared", true);
-                } catch (FacebookException ex) {
-                    Logger.getLogger(ShareImage.class.getName()).log(Level.SEVERE, null, ex);
-                    request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
-                }
+        // Get the image from the database
+        FaceBookHandler fbh = FaceBookHandler.getInstance();
+        Image image = dbh.getImage(imageId);
 
-                request.getRequestDispatcher("welcome.jsp").forward(request, response);
-            } else {
-                request.setAttribute("error", "Username does not exist.");
-            }
-        } else {
-            request.setAttribute("error", "User not logged in.");
+        try {
+            // Share the image on the FaceBook wall
+            fbh.shareImage(image.getName(), image.getBytes(), message);
+            request.setAttribute("imageShared", true);
+        } catch (FacebookException ex) {
+            Logger.getLogger(ShareImage.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
         }
-        
+
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
