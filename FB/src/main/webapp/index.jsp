@@ -30,7 +30,7 @@
             </form>
         </div>
     </div>
-    <div>
+<!--<div>
         <h1><a id="reg">Register</a></h1>
         
         <div id="register" class="form hidden">
@@ -49,6 +49,7 @@
             </form>
         </div>
     </div>
+-->
 </center>
         <script>
             $("#log").click(function(event){

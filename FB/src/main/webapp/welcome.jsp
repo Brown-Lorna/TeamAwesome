@@ -12,11 +12,13 @@
     </form>
     <!-- TODO: Show images from database -->
     <c:forEach var="image" items="${images}">
-                <p>
-                    <a href="">${image.firstName} - ${person.lastName}</a>
-                </p>
-            </c:forEach>
+        <p>
+            <a href=""></a>
+        </p>
+    </c:forEach>
     <!-- TODO: Share selected image to Facebook -->
+    
+    
 </center>
 
 <%@ include file="footer.jsp" %>
