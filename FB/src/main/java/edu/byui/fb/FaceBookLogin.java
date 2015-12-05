@@ -5,11 +5,8 @@
  */
 package edu.byui.fb;
 
-import facebook4j.FacebookException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Grant
  */
-@WebServlet(name = "ShareImage", urlPatterns = {"/ShareImage"})
-public class ShareImage extends HttpServlet {
+@WebServlet(name = "FaceBookLogin", urlPatterns = {"/FaceBookLogin"})
+public class FaceBookLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class ShareImage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShareImage</title>");            
+            out.println("<title>Servlet FaceBookLogin</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShareImage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet FaceBookLogin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,34 +58,7 @@ public class ShareImage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username     = (String)request.getSession().getAttribute("username");
-        String imageName    = (String)request.getAttribute("image");
-        String message      = (String)request.getAttribute("message");
-        
-        if (username != null) {
-            DataBaseHandler dbh = new DataBaseHandler();
-            boolean usernameExists = dbh.getUser(username);
-
-            if (usernameExists) {
-                FaceBookHandler fbh = FaceBookHandler.getInstance();
-                Image image = dbh.getImage(imageName);
-                
-                try {
-                    fbh.shareImage(image.getName(), image.getBytes());
-                } catch (FacebookException ex) {
-                    Logger.getLogger(ShareImage.class.getName()).log(Level.SEVERE, null, ex);
-                    request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
-                }
-
-                request.getRequestDispatcher("welcome.jsp").forward(request, response);
-            } else {
-                request.setAttribute("error", "Username does not exist.");
-            }
-        } else {
-            request.setAttribute("error", "User not logged in.");
-        }
-        
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -102,7 +72,23 @@ public class ShareImage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // Get image attribute
+        String image = (String)request.getAttribute("image");
+        String message      = (String)request.getAttribute("message");
+        
+        // Set up callback URL
+        StringBuffer callbackURL = request.getRequestURL();
+        int index = callbackURL.lastIndexOf("/");
+        callbackURL.replace(index, callbackURL.length(), "")
+                .append("/ShareImage?image=").append(image).append("&message=").append(message);
+        
+        // Get the login URL with the callback URL included.
+        FaceBookHandler fbh = FaceBookHandler.getInstance();
+        fbh.setCallbackURL(callbackURL.toString());
+        String loginUrl = fbh.getLoginURL();
+        
+        // Redirect to Facebook login dialog.
+        response.sendRedirect(loginUrl);
     }
 
     /**
