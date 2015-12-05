@@ -29,36 +29,46 @@
                 <input type="submit" value="Login" name="login" />
             </form>
         </div>
-    </div>
-<!--<div>
-        <h1><a id="reg">Register</a></h1>
-        
-        <div id="register" class="form hidden">
+
+        <form method="post" action="FaceBookLogin">
+            <label for="image">Image Id</label>
+            <input id="image" name="image" type="text" /> <br />
             
-            <form method="post" action="RegisterUser">
-                <label for="Username2">Enter a Username</label>
-                <input id="Username2" name="username" type="text" /> <br>
-
-                <label for="Password2">Enter Password</label>
-                <input id="Password2" name="password" type="password" /> <br>
-
-                <label for="Password3">Confirm Password</label>
-                <input id="Password3" name="confirm" type="password" /> <br>
-
-                <input type="submit" value="Register" name="register" />
-            </form>
-        </div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+            
+            <input type="submit" name="share" value="Share Image" />
+        </form>
     </div>
--->
+    <!--<div>
+            <h1><a id="reg">Register</a></h1>
+            
+            <div id="register" class="form hidden">
+                
+                <form method="post" action="RegisterUser">
+                    <label for="Username2">Enter a Username</label>
+                    <input id="Username2" name="username" type="text" /> <br>
+    
+                    <label for="Password2">Enter Password</label>
+                    <input id="Password2" name="password" type="password" /> <br>
+    
+                    <label for="Password3">Confirm Password</label>
+                    <input id="Password3" name="confirm" type="password" /> <br>
+    
+                    <input type="submit" value="Register" name="register" />
+                </form>
+            </div>
+        </div>
+    -->
 </center>
-        <script>
-            $("#log").click(function(event){
-                event.preventDefault();
-                $("#login").toggleClass("hidden");
-            });
-            $("#reg").click(function(event){
-                event.preventDefault();
-                $("#register").toggleClass("hidden");
-            });
-        </script>
+<script>
+    $("#log").click(function (event) {
+        event.preventDefault();
+        $("#login").toggleClass("hidden");
+    });
+    $("#reg").click(function (event) {
+        event.preventDefault();
+        $("#register").toggleClass("hidden");
+    });
+</script>
 <%@ include file="footer.jsp" %>

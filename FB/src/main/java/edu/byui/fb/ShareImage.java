@@ -62,8 +62,9 @@ public class ShareImage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get username, image name, and the message to be posted
-        int imageId = (int) request.getAttribute("image");
-        String message = (String) request.getAttribute("message");
+        int imageId    = Integer.parseInt((String)request.getSession().getAttribute("image"));
+        String message = (String)request.getSession().getAttribute("message");
+        String code    = (String)request.getParameter("code");
 
         // Is there a username on the session
         // Get the user from the database
@@ -75,6 +76,7 @@ public class ShareImage extends HttpServlet {
 
         try {
             // Share the image on the FaceBook wall
+            fbh.getAccessToken(code);
             fbh.shareImage(image.getName(), image.getBytes(), message);
             request.setAttribute("imageShared", true);
         } catch (FacebookException ex) {

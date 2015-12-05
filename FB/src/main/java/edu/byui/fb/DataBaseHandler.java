@@ -17,7 +17,7 @@ public class DataBaseHandler {
     private String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
     private String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:myql://" + host + ":" + port + "/holidatabase";
+    private final String DB_URL = "jdbc:mysql://" + host + ":" + port + "/holidatabase";
 
     // TODO: Is there any other member variable or function/method that is needed?
     private DataBaseHandler() {
@@ -39,13 +39,13 @@ public class DataBaseHandler {
     public Image getImage(int id) {
         Connection conn = null;
         Statement stmt = null;
-        String sql = null;
         ResultSet rs = null;
         Image image = new Image();
+        
         try {
             conn = DriverManager.getConnection(DB_URL, username, password);
             stmt = conn.createStatement();
-            sql = "SELECT * FROM images WHERE id = " + id + " LIMIT 1;";
+            String sql = "SELECT * FROM images WHERE id = " + id + " LIMIT 1;";
             rs = stmt.executeQuery(sql);
             rs.next();
             image.setName(rs.getString("title"));

@@ -22,12 +22,12 @@ public class FaceBookHandler {
     private Facebook facebook;
     private final String APP_ID      = "450092371846757";
     private final String APP_SECRET  = "34d0d6d10639df7ba75b3c847a94dd22";
-    private final String PERMISSIONS = "";
+    private final String PERMISSIONS = "publish_actions";
 
     private FaceBookHandler() {
         facebook = new FacebookFactory().getInstance();
         facebook.setOAuthAppId(APP_ID, APP_SECRET);
-//        facebook.setOAuthPermissions(PERMISSIONS);
+        facebook.setOAuthPermissions(PERMISSIONS);
     }
 
     public static FaceBookHandler getInstance() {
@@ -42,11 +42,16 @@ public class FaceBookHandler {
         facebook.setOAuthCallbackURL(url);
     }
 
+    void getAccessToken(String oauthCode) throws FacebookException {
+        facebook.getOAuthAccessToken(oauthCode);
+    }
+    
     boolean shareImage(String imageName, InputStream imageInput, String message) throws FacebookException {
         Media image = new Media(imageName, imageInput);
         PhotoUpdate statusUpdate = new PhotoUpdate(image);
         statusUpdate.setMessage(message);
         facebook.postPhoto(statusUpdate);
+//        facebook.postStatusMessage(message);
         return true;
     }
 }

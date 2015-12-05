@@ -73,14 +73,16 @@ public class FaceBookLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get image attribute
-        int imageId   = (int)request.getAttribute("image");
-        String message = (String)request.getAttribute("message");
+        String imageId = request.getParameter("image");
+        String message = request.getParameter("message");
+        request.getSession().setAttribute("image", imageId);
+        request.getSession().setAttribute("message", message);
         
         // Set up callback URL
         StringBuffer callbackURL = request.getRequestURL();
         int index = callbackURL.lastIndexOf("/");
         callbackURL.replace(index, callbackURL.length(), "")
-                .append("/ShareImage?image=").append(imageId).append("&message=").append(message);
+                .append("/ShareImage");
         
         // Get the login URL with the callback URL included.
         FaceBookHandler fbh = FaceBookHandler.getInstance();
