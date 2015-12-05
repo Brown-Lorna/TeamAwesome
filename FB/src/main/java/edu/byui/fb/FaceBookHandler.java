@@ -9,6 +9,7 @@ import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.FacebookFactory;
 import facebook4j.Media;
+import facebook4j.PhotoUpdate;
 import java.io.InputStream;
 
 /**
@@ -42,9 +43,11 @@ public class FaceBookHandler {
         facebook.setOAuthCallbackURL(url);
     }
 
-    boolean shareImage(String imageName, InputStream imageInput) throws FacebookException {
+    boolean shareImage(String imageName, InputStream imageInput, String message) throws FacebookException {
         Media image = new Media(imageName, imageInput);
-        facebook.postPhoto(image);
+        PhotoUpdate statusUpdate = new PhotoUpdate(image);
+        statusUpdate.setMessage(message);
+        facebook.postPhoto(statusUpdate);
         return true;
     }
 

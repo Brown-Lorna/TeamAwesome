@@ -61,20 +61,26 @@ public class ShareImage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Get username, image name, and the message to be posted
         String username     = (String)request.getSession().getAttribute("username");
         String imageName    = (String)request.getAttribute("image");
         String message      = (String)request.getAttribute("message");
         
+        // Is there a username on the session
         if (username != null) {
+            // Get the user from the database
             DataBaseHandler dbh = new DataBaseHandler();
             boolean usernameExists = dbh.getUser(username);
 
             if (usernameExists) {
+                // Get the image from the database
                 FaceBookHandler fbh = FaceBookHandler.getInstance();
                 Image image = dbh.getImage(imageName);
                 
                 try {
-                    fbh.shareImage(image.getName(), image.getBytes());
+                    // Share the image on the FaceBook wall
+                    fbh.shareImage(image.getName(), image.getBytes(), message);
+                    request.setAttribute("imageShared", true);
                 } catch (FacebookException ex) {
                     Logger.getLogger(ShareImage.class.getName()).log(Level.SEVERE, null, ex);
                     request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
