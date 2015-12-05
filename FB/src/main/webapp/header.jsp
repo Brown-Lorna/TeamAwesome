@@ -16,7 +16,7 @@
 <% addCount();%>
 <html>
     <head>
-        <title><!-- TODO: Dynamically add title --></title>
+        <title><%=title %></title>
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
     </head>
     <body>
