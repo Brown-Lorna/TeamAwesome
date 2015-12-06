@@ -17,8 +17,8 @@
         </p>
     </c:forEach>
     <!-- TODO: Share selected image to Facebook -->
-    
-    
+
+
 </center>
 
 <%@ include file="footer.jsp" %>

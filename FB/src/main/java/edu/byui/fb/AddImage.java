@@ -37,7 +37,7 @@ public class AddImage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddImage</title>");            
+            out.println("<title>Servlet AddImage</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AddImage at " + request.getContextPath() + "</h1>");
@@ -73,17 +73,12 @@ public class AddImage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO: Create DataBase Handler (DBH)
-        
+
         // TODO: Verify current user
-        
         // TODO: If user not logged in or user doesn't exist, redirect to index.jsp
-        
         // TODO: Allow user to choose the image from computer (use method findImage)
-        
         // TODO: Call addImage from DBH to add the bytes
-        
         // TODO: Any failure should redirect to welcome.jsp, with error message
-        
         // TODO: Redirect to welcome.jsp
     }
 

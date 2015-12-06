@@ -41,7 +41,7 @@ public class DataBaseHandler {
         Statement stmt = null;
         ResultSet rs = null;
         Image image = new Image();
-        
+
         try {
             conn = DriverManager.getConnection(DB_URL, username, password);
             stmt = conn.createStatement();
