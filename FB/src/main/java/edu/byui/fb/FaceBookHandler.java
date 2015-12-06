@@ -51,7 +51,6 @@ public class FaceBookHandler {
         PhotoUpdate statusUpdate = new PhotoUpdate(image);
         statusUpdate.setMessage(message);
         facebook.postPhoto(statusUpdate);
-//        facebook.postStatusMessage(message);
         return true;
     }
 }
