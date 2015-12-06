@@ -1,5 +1,6 @@
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- TODO: Create a way to set a title in the header.jsp. -->
 <%! String title = "Greetably";%>
@@ -39,6 +40,14 @@
 
             <input type="submit" name="share" value="Share Image" />
         </form>
+
+        <c:forEach var="image" items="${images}">
+            <p>
+               
+                <img src="${image}" title="${image.name}" alt="${image.id}">
+                
+            </p>
+        </c:forEach>
     </div>
     <!--<div>
             <h1><a id="reg">Register</a></h1>
