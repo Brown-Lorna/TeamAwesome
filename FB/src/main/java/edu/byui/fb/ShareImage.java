@@ -61,12 +61,11 @@ public class ShareImage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Get username, image name, and the message to be posted
-        int imageId = Integer.parseInt((String) request.getSession().getAttribute("image"));
-        String message = (String) request.getSession().getAttribute("message");
-        String code = (String) request.getParameter("code");
+        // Get image name, the message to be posted, and the current access token code
+        int imageId    = Integer.parseInt((String)request.getSession().getAttribute("image"));
+        String message = (String)request.getSession().getAttribute("message");
+        String code    = (String)request.getParameter("code");
 
-        // Is there a username on the session
         // Get the user from the database
         DataBaseHandler dbh = DataBaseHandler.getInstance();
 
@@ -74,8 +73,8 @@ public class ShareImage extends HttpServlet {
         FaceBookHandler fbh = FaceBookHandler.getInstance();
         Image image = dbh.getImage(imageId);
 
+        // Share the image to FaceBook Timeline
         try {
-            // Share the image on the FaceBook wall
             fbh.getAccessToken(code);
             fbh.shareImage(image.getName(), image.getBytes(), message);
             request.setAttribute("imageShared", true);
