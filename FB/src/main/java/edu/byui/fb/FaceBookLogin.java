@@ -77,18 +77,18 @@ public class FaceBookLogin extends HttpServlet {
         String message = request.getParameter("message");
         request.getSession().setAttribute("image", imageId);
         request.getSession().setAttribute("message", message);
-        
+
         // Set up callback URL
         StringBuffer callbackURL = request.getRequestURL();
         int index = callbackURL.lastIndexOf("/");
         callbackURL.replace(index, callbackURL.length(), "")
                 .append("/ShareImage");
-        
+
         // Get the login URL with the callback URL included.
         FaceBookHandler fbh = FaceBookHandler.getInstance();
         fbh.setCallbackURL(callbackURL.toString());
         String loginUrl = fbh.getLoginURL();
-        
+
         // Redirect to Facebook login dialog.
         response.sendRedirect(loginUrl);
     }

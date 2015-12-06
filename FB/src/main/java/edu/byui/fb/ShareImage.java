@@ -62,9 +62,9 @@ public class ShareImage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get username, image name, and the message to be posted
-        int imageId    = Integer.parseInt((String)request.getSession().getAttribute("image"));
-        String message = (String)request.getSession().getAttribute("message");
-        String code    = (String)request.getParameter("code");
+        int imageId = Integer.parseInt((String) request.getSession().getAttribute("image"));
+        String message = (String) request.getSession().getAttribute("message");
+        String code = (String) request.getParameter("code");
 
         // Is there a username on the session
         // Get the user from the database

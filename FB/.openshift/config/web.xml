@@ -537,81 +537,81 @@
      RHQ Server resource, via the RHQ GUI.
 
 
-       <init-param>
-           <param-name>chopQueryString</param-name>
-           <param-value>true</param-value>
-       </init-param>
-       <init-param>
-           <param-name>logDirectory</param-name>
-          <param-value>/tmp</param-value>
-       </init-param>
-       <init-param>
-           <param-name>logFilePrefix</param-name>
-           <param-value>localhost_7080_</param-value>
-       </init-param>
-       <init-param>
-           <param-name>dontLogRegEx</param-name>
-           <param-value></param-value>
-       </init-param>
-       <init-param>
-          <param-name>matchOnUriOnly</param-name>
-          <param-value>true</param-value>
-       </init-param>
-       <init-param>
-           <param-name>timeBetweenFlushesInSec</param-name>
-           <param-value>73</param-value>
-       </init-param>
-       <init-param>
-           <param-name>flushAfterLines</param-name>
-           <param-value>13</param-value>
-       </init-param>
-       <init-param>
-           <param-name>maxLogFileSize</param-name>
-           <param-value>5242880</param-value>
-       </init-param>
--->
-<!-- end tag (also uncomment start tag)
-    </filter>
--->
+           <init-param>
+               <param-name>chopQueryString</param-name>
+               <param-value>true</param-value>
+           </init-param>
+           <init-param>
+               <param-name>logDirectory</param-name>
+              <param-value>/tmp</param-value>
+           </init-param>
+           <init-param>
+               <param-name>logFilePrefix</param-name>
+               <param-value>localhost_7080_</param-value>
+           </init-param>
+           <init-param>
+               <param-name>dontLogRegEx</param-name>
+               <param-value></param-value>
+           </init-param>
+           <init-param>
+              <param-name>matchOnUriOnly</param-name>
+              <param-value>true</param-value>
+           </init-param>
+           <init-param>
+               <param-name>timeBetweenFlushesInSec</param-name>
+               <param-value>73</param-value>
+           </init-param>
+           <init-param>
+               <param-name>flushAfterLines</param-name>
+               <param-value>13</param-value>
+           </init-param>
+           <init-param>
+               <param-name>maxLogFileSize</param-name>
+               <param-value>5242880</param-value>
+           </init-param>
+    -->
+    <!-- end tag (also uncomment start tag)
+        </filter>
+    -->
 
 
-  <!-- The mapping for the SSI Filter -->
-<!--
-    <filter-mapping>
-        <filter-name>ssi</filter-name>
-        <url-pattern>*.shtml</url-pattern>
-    </filter-mapping>
--->
+    <!-- The mapping for the SSI Filter -->
+    <!--
+        <filter-mapping>
+            <filter-name>ssi</filter-name>
+            <url-pattern>*.shtml</url-pattern>
+        </filter-mapping>
+    -->
 
-  <!-- The mapping for the RHQ Filter                                       -->
-  <!-- To limit to only certain applications various filters can be         -->
-  <!-- defined. This will perform RT metric collection for all              -->
-  <!-- applications.                                                        -->
-  <!--                                                                      -->
-  <!-- Note: Uncomment only when also enabling the RhqRtFilter above.       -->
-<!--
-   <filter-mapping>
-       <filter-name>RhqRtFilter</filter-name>
-       <url-pattern>/*</url-pattern>
-   </filter-mapping>
--->
+    <!-- The mapping for the RHQ Filter                                       -->
+    <!-- To limit to only certain applications various filters can be         -->
+    <!-- defined. This will perform RT metric collection for all              -->
+    <!-- applications.                                                        -->
+    <!--                                                                      -->
+    <!-- Note: Uncomment only when also enabling the RhqRtFilter above.       -->
+    <!--
+       <filter-mapping>
+           <filter-name>RhqRtFilter</filter-name>
+           <url-pattern>/*</url-pattern>
+       </filter-mapping>
+    -->
 
 
-  <!-- ==================== Default Session Configuration ================= -->
-  <!-- You can set the default session timeout (in minutes) for all newly   -->
-  <!-- created sessions by modifying the value below.                       -->
+    <!-- ==================== Default Session Configuration ================= -->
+    <!-- You can set the default session timeout (in minutes) for all newly   -->
+    <!-- created sessions by modifying the value below.                       -->
 
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
 
 
-  <!-- ===================== Default MIME Type Mappings =================== -->
-  <!-- When serving static resources, Tomcat will automatically generate    -->
-  <!-- a "Content-Type" header based on the resource's filename extension,  -->
-  <!-- based on these mappings.  Additional mappings can be added here (to  -->
-  <!-- apply to all web applications), or in your own application's web.xml -->
-  <!-- deployment descriptor.                                               -->
+    <!-- ===================== Default MIME Type Mappings =================== -->
+    <!-- When serving static resources, Tomcat will automatically generate    -->
+    <!-- a "Content-Type" header based on the resource's filename extension,  -->
+    <!-- based on these mappings.  Additional mappings can be added here (to  -->
+    <!-- apply to all web applications), or in your own application's web.xml -->
+    <!-- deployment descriptor.                                               -->
 
     <mime-mapping>
         <extension>123</extension>
@@ -4356,19 +4356,19 @@
         <mime-type>application/vnd.handheld-entertainment+xml</mime-type>
     </mime-mapping>
 
-  <!-- ==================== Default Welcome File List ===================== -->
-  <!-- When a request URI refers to a directory, the default servlet looks  -->
-  <!-- for a "welcome file" within that directory and, if present, to the   -->
-  <!-- corresponding resource URI for display.                              -->
-  <!-- If no welcome files are present, the default servlet either serves a -->
-  <!-- directory listing (see default servlet configuration on how to       -->
-  <!-- customize) or returns a 404 status, depending on the value of the    -->
-  <!-- listings setting.                                                    -->
-  <!--                                                                      -->
-  <!-- If you define welcome files in your own application's web.xml        -->
-  <!-- deployment descriptor, that list *replaces* the list configured      -->
-  <!-- here, so be sure to include any of the default values that you wish  -->
-  <!-- to use within your application.                                       -->
+    <!-- ==================== Default Welcome File List ===================== -->
+    <!-- When a request URI refers to a directory, the default servlet looks  -->
+    <!-- for a "welcome file" within that directory and, if present, to the   -->
+    <!-- corresponding resource URI for display.                              -->
+    <!-- If no welcome files are present, the default servlet either serves a -->
+    <!-- directory listing (see default servlet configuration on how to       -->
+    <!-- customize) or returns a 404 status, depending on the value of the    -->
+    <!-- listings setting.                                                    -->
+    <!--                                                                      -->
+    <!-- If you define welcome files in your own application's web.xml        -->
+    <!-- deployment descriptor, that list *replaces* the list configured      -->
+    <!-- here, so be sure to include any of the default values that you wish  -->
+    <!-- to use within your application.                                       -->
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

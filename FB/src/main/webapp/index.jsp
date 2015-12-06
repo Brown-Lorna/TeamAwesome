@@ -33,10 +33,10 @@
         <form method="post" action="FaceBookLogin">
             <label for="image">Image Id</label>
             <input id="image" name="image" type="text" /> <br />
-            
+
             <label for="message">Message</label>
             <textarea id="message" name="message"></textarea>
-            
+
             <input type="submit" name="share" value="Share Image" />
         </form>
     </div>
