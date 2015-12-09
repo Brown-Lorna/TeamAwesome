@@ -37,7 +37,7 @@ public class RegisterUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterUser</title>");            
+            out.println("<title>Servlet RegisterUser</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RegisterUser at " + request.getContextPath() + "</h1>");
@@ -73,11 +73,9 @@ public class RegisterUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO: Create DataBase Handler (DBH)
-        
+
         // TODO: Add a user to DB using addUser in DBH.
-        
         // TODO: Any failure should redirect to index.jsp, with error message
-        
         // TODO: Redirect to welcome.jsp
     }
 

@@ -1,5 +1,6 @@
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- TODO: Create a way to set a title in the header.jsp. -->
 <%! String title = "Greetably";%>
@@ -33,12 +34,20 @@
         <form method="post" action="FaceBookLogin">
             <label for="image">Image Id</label>
             <input id="image" name="image" type="text" /> <br />
-            
+
             <label for="message">Message</label>
             <textarea id="message" name="message"></textarea>
-            
+
             <input type="submit" name="share" value="Share Image" />
         </form>
+
+        <c:forEach var="image" items="${images}">
+            <p>
+               
+                <img src="${image}" title="${image.name}" alt="${image.id}">
+                
+            </p>
+        </c:forEach>
     </div>
     <!--<div>
             <h1><a id="reg">Register</a></h1>

@@ -23,10 +23,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
+
     private final String MASTER_USER = "admin";
     private final String MASTER_PASS = "adminPASS2";
     private String dataDirectory = System.getenv("OPENSHIFT_DATA_DIR");
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,13 +73,10 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO: Create DataBaseHandler
-        
+
         // TODO: Check username against Database
-        
         // TODO: Check password against hashed password in Database
-        
         // TODO: If all's good, create session and set session username.
-        
         // TODO: Redirect to welcome.jsp or display incorrect credentials information
     }
 

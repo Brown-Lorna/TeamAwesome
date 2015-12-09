@@ -1,10 +1,14 @@
 package edu.byui.fb;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +24,7 @@ public class DataBaseHandler {
     private final String DB_URL = "jdbc:mysql://" + host + ":" + port + "/holidatabase";
 
     // TODO: Is there any other member variable or function/method that is needed?
-    private DataBaseHandler() {
+    DataBaseHandler() {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException ex) {
@@ -41,7 +45,7 @@ public class DataBaseHandler {
         Statement stmt = null;
         ResultSet rs = null;
         Image image = new Image();
-        
+
         try {
             conn = DriverManager.getConnection(DB_URL, username, password);
             stmt = conn.createStatement();
@@ -67,5 +71,61 @@ public class DataBaseHandler {
         }
 
         return image;
+    }
+    
+    public List getImages() {
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<Image> images = new ArrayList<>();
+        try {
+            //connect
+            if (host == null) {
+                host = "localhost";
+                port = "3306";
+                username = "root";
+                password = "homestar";
+            }
+            conn = DriverManager.getConnection(DB_URL, username, password);
+            stmt = conn.createStatement();
+            System.out.println("Connected!");
+            sql = "SELECT * FROM images;";
+            rs = stmt.executeQuery(sql);
+            System.out.println("Executed!");
+            while (rs.next()) {
+                System.out.println(rs.getString("title"));
+                System.out.println(rs.getBlob("image"));
+                System.out.println(rs.getString("user_id"));
+                System.out.println(rs.getInt("id"));
+                Image image = new Image();
+                Blob blob = rs.getBlob("image");
+                image.setName(rs.getString("title"));
+                image.setBytes((InputStream) blob);
+                image.setId(rs.getInt("id"));
+
+                images.add(image);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return images;
     }
 }

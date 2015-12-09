@@ -20,7 +20,7 @@
         <div id="header">
             <h1>Greetably</h1>
             <div>
-                
+
             </div>
         </div>
     <center>

@@ -35,7 +35,7 @@ public class Logout extends HttpServlet {
         //check correct username and password
         request.getSession().removeAttribute("username");
         request.getRequestDispatcher("index.jsp").forward(request, response);
-        
+
         // TODO: Is there anything else we need to worry about?
     }
 
