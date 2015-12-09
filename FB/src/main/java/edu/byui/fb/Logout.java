@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.byui.lesson9activity;
+package edu.byui.fb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,6 +31,8 @@ public class Logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //check correct username and password
         request.getSession().removeAttribute("username");
         request.getRequestDispatcher("index.jsp").forward(request, response);
         

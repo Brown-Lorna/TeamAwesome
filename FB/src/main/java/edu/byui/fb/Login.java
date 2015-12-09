@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.byui.lesson9activity;
+package edu.byui.fb;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -39,6 +39,10 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO: Do we need to do anything here?
+        String correctName = "";
+        String correctPass = "";
+        
+        String username = request.getParameter;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
