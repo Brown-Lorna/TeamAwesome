@@ -71,28 +71,20 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Create DataBaseHandler
         DataBaseHandler dbh = DataBaseHandler.getInstance();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        // TODO: Check username against Database
+
         User user = dbh.getUser(username);
-        if (user != null) {
-
-            // TODO: Check password against hashed password in Database
-            if (password.equals(user.getPassword())) {
-
-                // TODO: If all's good, create session and set session username and userType.
-                request.getSession().setAttribute("logged", true);
-                request.getSession().setAttribute("username", user.getUsername());
-                request.getSession().setAttribute("userType", user.getUserType());
-            } else {
-                request.setAttribute("error", "Username/Password is incorrect");
-            }
+        
+        if (user != null && password.equals(user.getPassword())) {
+            request.getSession().setAttribute("logged", true);
+            request.getSession().setAttribute("username", user.getUsername());
+            request.getSession().setAttribute("userType", user.getUserType());
         } else {
             request.setAttribute("error", "Username/Password is incorrect");
         }
-        // TODO: Redirect to welcome.jsp or display incorrect credentials information
+        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
