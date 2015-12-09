@@ -6,18 +6,23 @@
 package edu.byui.fb;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author Grant
  */
 @WebServlet(name = "AddImage", urlPatterns = {"/AddImage"})
+@MultipartConfig
 public class AddImage extends HttpServlet {
 
     /**
@@ -31,19 +36,6 @@ public class AddImage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddImage</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddImage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,14 +64,20 @@ public class AddImage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Create DataBase Handler (DBH)
-
-        // TODO: Verify current user
-        // TODO: If user not logged in or user doesn't exist, redirect to index.jsp
-        // TODO: Allow user to choose the image from computer (use method findImage)
-        // TODO: Call addImage from DBH to add the bytes
-        // TODO: Any failure should redirect to welcome.jsp, with error message
-        // TODO: Redirect to welcome.jsp
+        DataBaseHandler dbh = DataBaseHandler.getInstance();
+        boolean logged = (boolean)request.getSession().getAttribute("logged");
+        String username = (String)request.getSession().getAttribute("username");
+        User user = dbh.getUser("username");
+        
+        if (username != null && user != null && logged) {
+            Part imagePart = request.getPart("image");
+            Image image = new Image(imagePart.getName(), imagePart.getInputStream());
+            dbh.addImage(image, user);
+        } else {
+            request.setAttribute("error", "Not logged in. Cannot upload an image.");
+        }
+        
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
     /**

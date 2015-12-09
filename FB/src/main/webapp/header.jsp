@@ -2,31 +2,20 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%!
-    int pageCount = 0;
-    
-    void addCount() {
-        pageCount++;
-    }
-%>
-<% addCount();%>
 <html>
     <head>
-        <title><%=title %></title>
+        <title><%=title%></title>
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
         <script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
     </head>
     <body>
-        <div id="header">
-            <h1>Greetably</h1>
-            <div>
-
-            </div>
-        </div>
-    <center>
-        <!-- TODO: index.jsp/welcome.jsp (Only if user is logged in) link -->
-        <!-- TODO: logout.jsp link (Only appear if user is logged in) -->
-        <h2>Testing Layout</h2>
-        <p>This site has been visited <%= pageCount%> times.</p>
-    </center>
-    <br/><br/>
+        <nav id="NavBar">
+            <ul>                        
+                <li class="<%= session.getAttribute("indexClass")%>"><a href="index.jsp">HOME</a></li>
+                <li class="<%= session.getAttribute("adminClass")%>"><a href="admin.jsp">ADMIN</a></li>
+                <c:if test="<%= (Boolean)session.getAttribute("logged")%>">
+                    <li><a href="Logout">LOGOUT</a></li>
+                </c:if>
+            </ul>
+        </nav>
+        <br/><br/>

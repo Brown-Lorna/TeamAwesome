@@ -26,6 +26,12 @@ public class Image {
         this.bytes = bytes;
     }
 
+    public Image(String name, InputStream bytes, int id) {
+        this.name = name;
+        this.bytes = bytes;
+        this.id = id;
+    }
+    
     public int getId() {
         return id;
     }

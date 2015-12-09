@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- TODO: Create a way to set a title in the header.jsp. -->
+<%
+    session.setAttribute("indexClass", "CurrentPage");
+    session.setAttribute("adminClass", "Page");
+%>
 <%! String title = "Greetably";%>
 <%@ include file="header.jsp" %>
 <center>

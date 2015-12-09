@@ -80,9 +80,10 @@ public class Login extends HttpServlet {
         if (user != null) {
 
             // TODO: Check password against hashed password in Database
-            if (username.equals(user.getPassword())) {
+            if (password.equals(user.getPassword())) {
 
                 // TODO: If all's good, create session and set session username and userType.
+                request.getSession().setAttribute("logged", true);
                 request.getSession().setAttribute("username", user.getUsername());
                 request.getSession().setAttribute("userType", user.getUserType());
             } else {
