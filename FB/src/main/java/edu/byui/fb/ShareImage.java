@@ -80,6 +80,7 @@ public class ShareImage extends HttpServlet {
             request.setAttribute("imageShared", true);
         } catch (FacebookException ex) {
             Logger.getLogger(ShareImage.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorExists", true);
             request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
         }
 

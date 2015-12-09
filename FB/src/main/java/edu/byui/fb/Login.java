@@ -75,17 +75,18 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        User user = dbh.getUser(username);
+        User user = null;//dbh.getUser(username);
         
         if (user != null && password.equals(user.getPassword())) {
             request.getSession().setAttribute("logged", true);
             request.getSession().setAttribute("username", user.getUsername());
             request.getSession().setAttribute("userType", user.getUserType());
         } else {
+            request.setAttribute("errorExists", true);
             request.setAttribute("error", "Username/Password is incorrect");
         }
         
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
     /**

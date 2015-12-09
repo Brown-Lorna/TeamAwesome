@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Grant
  */
 @WebServlet(name = "RegisterUser", urlPatterns = {"/RegisterUser"})
-public class RegisterUser extends HttpServlet {
+public class DeleteImage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

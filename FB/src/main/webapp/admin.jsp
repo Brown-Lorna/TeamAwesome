@@ -25,6 +25,9 @@
 <%@ include file="header.jsp" %>
 <center>
     <div>
+        <c:if test="${errorExists}">
+            <h3 class="ErrorMessage">${error}</h3>
+        </c:if>
         <c:choose>
             <c:when test="<%= logged%>">
                 <h1>Add Image</h1>

@@ -101,3 +101,7 @@ input {
 .Page {
     
 }
+
+.ErrorMessage {
+    color: red;
+}
