@@ -1,8 +1,4 @@
 
-
-<%@page import="sun.security.krb5.Confounder.bytes(int)"%>
-<%@page import="sun.security.krb5.Confounder.bytes(int)"%>
-<%@page import="java.io.InputStream"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- TODO: Create a way to set a title in the header.jsp. -->
@@ -12,7 +8,11 @@
 %>
 <%! String title = "Greetably";%>
 <%@ include file="header.jsp" %>
-
+    <c:if test="${empty redirect}">
+        <script>
+            location.href = "LoadImages";
+        </script>
+    </c:if>
     <!-- TODO: Register User Form -->
     <!-- TODO: Edit Login Form -->
 
@@ -53,7 +53,7 @@
             
             <p>
                
-                <img src="bytesToImage?id=${image.id}" title="${image.name}" alt="${image.id}">
+                <img src="BytesToImage?id=${image.id}" title="${image.name}" alt="${image.name}">
                 
             </p>
         </c:forEach>
