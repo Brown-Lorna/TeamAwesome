@@ -4,16 +4,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
     String title = "Greetably - Admin Access";
-    boolean logged = false;
+    boolean loggedAdmin = false;
     int userType = -1;
 %>
 <%
     session.setAttribute("indexClass", "Page");
     session.setAttribute("adminClass", "CurrentPage");
     if (session.getAttribute("logged") == null || !(Boolean) session.getAttribute("logged")) {
-        logged = false;
+        loggedAdmin = false;
     } else {
-        logged = true;
+        loggedAdmin = true;
     }
 
     if (session.getAttribute("userType") == null) {
@@ -29,7 +29,7 @@
             <h3 class="ErrorMessage">${error}</h3>
         </c:if>
         <c:choose>
-            <c:when test="<%= logged%>">
+            <c:when test="<%= loggedAdmin%>">
                 <h1>Add Image</h1>
                 <form name="addImageForm" action="AddImage" method="post" enctype="multipart/form-data">
                     <label for="image">Choose an image</label>

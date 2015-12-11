@@ -67,12 +67,12 @@ public class AddImage extends HttpServlet {
         DataBaseHandler dbh = DataBaseHandler.getInstance();
         boolean logged = (boolean)request.getSession().getAttribute("logged");
         String username = (String)request.getSession().getAttribute("username");
-        User user = null;//dbh.getUser("username");
+        User user = dbh.getUser(username);
         
         if (username != null && user != null && logged) {
             Part imagePart = request.getPart("image");
             Image image = new Image(imagePart.getName(), imagePart.getInputStream());
-            //dbh.addImage(image, user);
+            dbh.addImage(image, user);
         } else {
             request.setAttribute("errorExists", true);
             request.setAttribute("error", "Not logged in. Cannot upload an image.");

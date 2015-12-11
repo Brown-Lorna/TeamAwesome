@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,10 +37,35 @@ public class DataBaseHandler {
         return DBH_INSTANCE;
     }
 
-    // TODO: getImages
-    // TODO: getUser
-    // TODO: addImage
-    // TODO: Image getImage(id)
+    public void addImage(Image image, User user) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, username, password);
+            String sql = "INSERT INTO images (image, title, user_id) VALUES (?, ?, ?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setBlob(1, image.getBytes());
+            stmt.setString(2, image.getName());
+            stmt.setInt(3, user.getId());
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public Image getImage(int id) {
         Connection conn = null;
         Statement stmt = null;
@@ -72,7 +98,7 @@ public class DataBaseHandler {
 
         return image;
     }
-    
+
     public List getImages() {
         Connection conn = null;
         Statement stmt = null;
@@ -129,7 +155,7 @@ public class DataBaseHandler {
         return images;
     }
 
-    public User getUser(int id) {
+    public User getUser(String user_name) {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -138,11 +164,13 @@ public class DataBaseHandler {
         try {
             conn = DriverManager.getConnection(DB_URL, username, password);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM users WHERE user_id = " + id + " LIMIT 1;";
+            String sql = "SELECT * FROM users WHERE user_name = '" + user_name + "' LIMIT 1;";
             rs = stmt.executeQuery(sql);
             rs.next();
             user.setUsername(rs.getString("user_name"));
             user.setId(rs.getInt("user_id"));
+            user.setUserType(rs.getInt("user_type"));
+            user.setPassword(rs.getString("user_pass"));
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -160,5 +188,5 @@ public class DataBaseHandler {
 
         return user;
     }
-    
+
 }

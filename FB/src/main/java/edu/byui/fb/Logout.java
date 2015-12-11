@@ -31,12 +31,9 @@ public class Logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //check correct username and password
         request.getSession().removeAttribute("username");
+        request.getSession().removeAttribute("logged");
         request.getRequestDispatcher("index.jsp").forward(request, response);
-
-        // TODO: Is there anything else we need to worry about?
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
