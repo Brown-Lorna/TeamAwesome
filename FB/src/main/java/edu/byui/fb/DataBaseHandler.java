@@ -177,4 +177,36 @@ public class DataBaseHandler {
         return is;
     }
 
+    public User getUser(int id) {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        User user = new User();
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, username, password);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM users WHERE user_id = " + id + " LIMIT 1;";
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            user.setUsername(rs.getString("user_name"));
+            user.setId(rs.getInt("user_id"));
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return user;
+    }
+    
 }
