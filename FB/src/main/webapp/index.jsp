@@ -1,5 +1,8 @@
 
 
+<%@page import="sun.security.krb5.Confounder.bytes(int)"%>
+<%@page import="sun.security.krb5.Confounder.bytes(int)"%>
+<%@page import="java.io.InputStream"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- TODO: Create a way to set a title in the header.jsp. -->
@@ -9,11 +12,11 @@
 %>
 <%! String title = "Greetably";%>
 <%@ include file="header.jsp" %>
-<center>
+
     <!-- TODO: Register User Form -->
     <!-- TODO: Edit Login Form -->
 
-    <div>
+    
         <h1><a id="log">Login</a></h1>
 
         <c:if test="${incorrectCredentials}">
@@ -44,15 +47,17 @@
 
             <input type="submit" name="share" value="Share Image" />
         </form>
+        
 
         <c:forEach var="image" items="${images}">
+            
             <p>
                
-                <img src="${image}" title="${image.name}" alt="${image.id}">
+                <img src="bytesToImage?id=${image.id}" title="${image.name}" alt="${image.id}">
                 
             </p>
         </c:forEach>
-    </div>
+    
     <!--<div>
             <h1><a id="reg">Register</a></h1>
             
@@ -73,7 +78,7 @@
             </div>
         </div>
     -->
-</center>
+
 <script>
     $("#log").click(function (event) {
         event.preventDefault();

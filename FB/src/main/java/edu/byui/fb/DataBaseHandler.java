@@ -125,9 +125,10 @@ public class DataBaseHandler {
                 System.out.println(rs.getString("user_id"));
                 System.out.println(rs.getInt("id"));
                 Image image = new Image();
-                Blob blob = rs.getBlob("image");
+                InputStream is = rs.getBinaryStream("image");
+
                 image.setName(rs.getString("title"));
-                image.setBytes((InputStream) blob);
+                image.setBytes(is);
                 image.setId(rs.getInt("id"));
 
                 images.add(image);
