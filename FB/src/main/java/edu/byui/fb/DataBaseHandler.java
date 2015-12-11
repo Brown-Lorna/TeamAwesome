@@ -72,7 +72,7 @@ public class DataBaseHandler {
 
         return image;
     }
-    
+
     public List getImages() {
         Connection conn = null;
         Statement stmt = null;
@@ -99,9 +99,10 @@ public class DataBaseHandler {
                 System.out.println(rs.getString("user_id"));
                 System.out.println(rs.getInt("id"));
                 Image image = new Image();
-                Blob blob = rs.getBlob("image");
+                InputStream is = rs.getBinaryStream("image");
+
                 image.setName(rs.getString("title"));
-                image.setBytes((InputStream) blob);
+                image.setBytes(is);
                 image.setId(rs.getInt("id"));
 
                 images.add(image);
@@ -128,4 +129,52 @@ public class DataBaseHandler {
 
         return images;
     }
+
+    public InputStream findImage(int id) {
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        InputStream is = null;
+        try {
+            //connect
+            if (host == null) {
+                host = "localhost";
+                port = "3306";
+                username = "root";
+                password = "homestar";
+            }
+            conn = DriverManager.getConnection(DB_URL, username, password);
+            stmt = conn.createStatement();
+            System.out.println("Connected!");
+            sql = "SELECT TOP 1 image FROM images WHERE id = '" + id + "';";
+            rs = stmt.executeQuery(sql);
+            System.out.println("Executed!");
+
+            is = rs.getBinaryStream("image");
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return is;
+    }
+
 }

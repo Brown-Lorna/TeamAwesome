@@ -6,20 +6,22 @@
 package edu.byui.fb;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
+
 
 /**
  *
- * @author THERIAULT
+ * @author Theriault
  */
-@WebServlet(name = "DisplayImages", urlPatterns = {"/DisplayImages"})
-public class DisplayImages extends HttpServlet {
+@WebServlet(name = "bytesToImage", urlPatterns = {"/bytesToImage"})
+public class bytesToImage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,12 +34,13 @@ public class DisplayImages extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("image/jpeg");
+        String idstr = request.getParameter("id");
+        int id = Integer.parseInt(idstr);
         DataBaseHandler dbh = new DataBaseHandler();
-        List<Image> images = dbh.getImages();
-        
-                
-        request.setAttribute("images", images);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        InputStream is = dbh.findImage(id);
+        byte[] ba = IOUtils.toByteArray(is);
+        response.getOutputStream().write(ba);
         
     }
 
