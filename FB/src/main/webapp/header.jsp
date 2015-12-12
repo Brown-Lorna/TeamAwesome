@@ -23,8 +23,8 @@
     </head>
     <body>
         <nav id="NavBar">
-            <a href="index.jsp"><h1 style="font-family: 'Colonna MT', serif; font-weight: normal; color: red;">
-                    <span style='font-size: 50px;'>G</span>REETABLY</h1></a>
+            <h1 style="font-family: 'Colonna MT', serif; font-weight: normal;">
+                <a href="index.jsp"><span style='font-size: 50px;'>G</span>REETABLY</a></h1>
             <ul>                        
                 <li class="<%= session.getAttribute("indexClass")%>"><a href="index.jsp">HOME</a></li>
                 <li class="<%= session.getAttribute("adminClass")%>"><a href="admin.jsp">ADMIN</a></li>
