@@ -9,7 +9,7 @@
 <%! String title = "Greetably - Share a season's gretting to Facebook!";%>
 <%@ include file="header.jsp" %>
     <c:if test="${empty redirect}">
-        <script> location.href = "LoadImages"; </script>
+        <script> location.href = "LoadImages?dest=index.jsp"; </script>
     </c:if>
 
     <div id="MainDiv">

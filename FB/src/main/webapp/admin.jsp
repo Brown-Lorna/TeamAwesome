@@ -23,6 +23,9 @@
     }
 %>
 <%@ include file="header.jsp" %>
+    <c:if test="${empty redirect}">
+        <script> location.href = "LoadImages?dest=admin.jsp"; </script>
+    </c:if>
     <div id="MainDiv">
         <c:if test="${errorExists}">
             <h3 class="ErrorMessage">${error}</h3>

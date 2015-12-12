@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Grant
  */
-@WebServlet(name = "RegisterUser", urlPatterns = {"/RegisterUser"})
+@WebServlet(name = "DeleteImage", urlPatterns = {"/DeleteImage"})
 public class DeleteImage extends HttpServlet {
 
     /**
@@ -31,19 +31,7 @@ public class DeleteImage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterUser</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,16 +60,19 @@ public class DeleteImage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Create DataBase Handler (DBH)
+        // Get the DataBaseHandler
         DataBaseHandler dbh = DataBaseHandler.getInstance();
         
+        // Gather information regarding the image to be deleted
         int imageId = Integer.parseInt(request.getParameter("imageId"));
         String username = (String)request.getSession().getAttribute("username");
         boolean logged  = (Boolean)request.getSession().getAttribute("logged");
         int userType    = (Integer)request.getSession().getAttribute("userType");
         
+        // Get the user that is wishing to delete
         User user = dbh.getUser(username);
         
+        // Is the current person trying to delete authorized to do so?
         if (user != null && logged && userType == 0) {
             dbh.deleteImage(imageId);
             request.setAttribute("imageDeleted", true);
@@ -89,7 +80,7 @@ public class DeleteImage extends HttpServlet {
             request.setAttribute("deletedError", true);
         }
         
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        request.getRequestDispatcher("LoadImages?dest=admin.jsp").forward(request, response);
     }
 
     /**

@@ -7,8 +7,6 @@ package edu.byui.fb;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -112,18 +108,18 @@ public class AddImage extends HttpServlet {
                     // Set up the image and add to the DataBase.
                     Image image = new Image(title, imageInputStream);
                     dbh.addImage(image, user);
+                    request.setAttribute("imageAdded", true);
                 } catch (FileUploadException ex) {
                     Logger.getLogger(AddImage.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
             // Was there an error?
-            request.setAttribute("errorExists", true);
-            request.setAttribute("error", "Not logged in. Cannot upload an image.");
+            request.setAttribute("addedError", true);
         }
         
         // Go to admin.jsp
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        request.getRequestDispatcher("LoadImages?dest=admin.jsp").forward(request, response);
     }
 
     /**

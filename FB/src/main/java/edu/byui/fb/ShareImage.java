@@ -73,7 +73,7 @@ public class ShareImage extends HttpServlet {
         }
 
         // Go to LoadImages (index.jsp)
-        request.getRequestDispatcher("LoadImages").forward(request, response);
+        request.getRequestDispatcher("LoadImages?dest=index.jsp").forward(request, response);
     }
 
     /**
