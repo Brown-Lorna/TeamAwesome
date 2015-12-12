@@ -12,8 +12,8 @@
     <script> location.href = "LoadImages?dest=index.jsp";</script>
 </c:if>
 
-<div id="MainDiv">
-    <div class="w3-container w3-row">
+<div class='w3-row' style="max-width: 1200px;">
+    <div class="w3-container">
         <div class="w3-container" style="width: 75%;">
             <c:if test="${imageShared}">
                 <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
