@@ -13,6 +13,8 @@
 </c:if>
 
 <div id="MainDiv">
+    <div class="w3-container w3-row">
+        <div class="w3-container" style="width: 75%;">
     <c:if test="${imageShared}">
         <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
     </c:if>
@@ -46,7 +48,8 @@
                 }
             });
         </script>
-        <div id="messagebox">
+        </div>
+        <div id="messagebox" class="w3-container w3-quarter">
             <label for="message">Message</label><br />
             <textarea rows="10" cols="40" id="message" name="message"></textarea><br />
 
@@ -64,5 +67,6 @@
             $("#register").toggleClass("hidden");
         });
     </script>
+    </div>
 </div>
 <%@ include file="footer.jsp" %>
