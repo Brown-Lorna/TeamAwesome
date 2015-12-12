@@ -53,7 +53,7 @@
             <label for="message">Message</label><br />
             <textarea rows="10" cols="40" id="message" name="message"></textarea><br />
 
-            <input type="submit" name="share" value="Share Image" />
+            <input type="submit" name="share" value="Share Image to Facebook" />
         </div>
         </form>
 
