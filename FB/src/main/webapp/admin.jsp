@@ -44,7 +44,7 @@
             <c:if test="${deletedError}">
                 <h3 class="ErrorMessage">Cannot delete image. Permissions are incorrect.</h3>
             </c:if>
-            <div id="upload">
+                <div id="upload" class="w3-card w3-blue">
                 <h1>Upload an Image to the Database</h1>
                 <form name="addImageForm" action="AddImage" method="post" enctype="multipart/form-data">
 
