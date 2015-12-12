@@ -13,56 +13,60 @@
 </c:if>
 
 <div id="MainDiv">
-    <c:if test="${imageShared}">
-        <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
-    </c:if>
-    <c:if test="${errorExists}">
-        <h3 class="ErrorMessage">${error}</h3>
-    </c:if>
+    <div class="w3-container w3-row">
+        <div class="w3-container" style="width: 75%;">
+            <c:if test="${imageShared}">
+                <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
+            </c:if>
+            <c:if test="${errorExists}">
+                <h3 class="ErrorMessage">${error}</h3>
+            </c:if>
 
-    <h1><a id="log">Share an Image to Facebook!</a></h1>
+            <h1><a id="log">Share an Image to Facebook!</a></h1>
 
-    <form method="post" action="FaceBookLogin">
-        <input id="imageId" type="hidden" name="imageId" value="null" />
-        <select id="images">
-            <%! int count;%>
-            <% count = 1;%>
-            <c:forEach var="image" items="${images}">
-                <option value="${image.id}" data-img-src="BytesToImage?id=${image.id}">Image <%= count%> - ${image.name}</option>
-                <% count++;%>
-            </c:forEach>
-        </select>
+            <form method="post" action="FaceBookLogin">
+                <input id="imageId" type="hidden" name="imageId" value="null" />
+                <select id="images">
+                    <%! int count;%>
+                    <% count = 1;%>
+                    <c:forEach var="image" items="${images}">
+                        <option value="${image.id}" data-img-src="BytesToImage?id=${image.id}">Image <%= count%> - ${image.name}</option>
+                        <% count++;%>
+                    </c:forEach>
+                </select>
 
-        <script>
-            var currentImage = null;
-            $("#images").imagepicker({
-                show_label: true,
-                initialized: function () {
-                    currentImage = $("input#imageId").first();
-                    currentImage.attr("value", this.select[0][0].attributes.value.value);
-                },
-                selected: function (option) {
-                    currentImage.attr("value", option.option[0].attributes.value.value);
-                }
-            });
-        </script>
-        <div id="messagebox">
+                <script>
+                    var currentImage = null;
+                    $("#images").imagepicker({
+                        show_label: true,
+                        initialized: function () {
+                            currentImage = $("input#imageId").first();
+                            currentImage.attr("value", this.select[0][0].attributes.value.value);
+                        },
+                        selected: function (option) {
+                            currentImage.attr("value", option.option[0].attributes.value.value);
+                        }
+                    });
+                </script>
+        </div>
+        <div id="messagebox" class="w3-container w3-quarter w3-card w3-indigo">
             <label for="message">Message</label><br />
             <textarea rows="10" cols="40" id="message" name="message"></textarea><br />
 
             <input type="submit" name="share" value="Share Image" />
         </div>
-    </form>
+        </form>
 
-    <script>
-        $("#log").click(function (event) {
-            event.preventDefault();
-            $("#login").toggleClass("hidden");
-        });
-        $("#reg").click(function (event) {
-            event.preventDefault();
-            $("#register").toggleClass("hidden");
-        });
-    </script>
+        <script>
+            $("#log").click(function (event) {
+                event.preventDefault();
+                $("#login").toggleClass("hidden");
+            });
+            $("#reg").click(function (event) {
+                event.preventDefault();
+                $("#register").toggleClass("hidden");
+            });
+        </script>
+    </div>
 </div>
 <%@ include file="footer.jsp" %>
