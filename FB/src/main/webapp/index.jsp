@@ -12,9 +12,8 @@
     <script> location.href = "LoadImages?dest=index.jsp";</script>
 </c:if>
 
-<div class='w3-row' style="max-width: 1200px;">
-    <div class="w3-container">
-        <div class="w3-container" style="width: 75%;">
+<div id='MainDiv'>
+    
             <c:if test="${imageShared}">
                 <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
             </c:if>
@@ -48,10 +47,10 @@
                         }
                     });
                 </script>
-        </div>
-        <div id="messagebox" class="w3-input-group w3-quarter w3-card w3-indigo">
+        
+        <div id="messagebox" >
             <label for="message">Message</label><br />
-            <textarea class='w3-input' style='min-height: 30px;' id="message" name="message"></textarea><br />
+            <textarea cols='40' rows="10" id="message" name="message"></textarea><br />
 
             <input type="submit" name="share" value="Share Image to Facebook" />
         </div>
@@ -67,6 +66,6 @@
                 $("#register").toggleClass("hidden");
             });
         </script>
-    </div>
+    
 </div>
 <%@ include file="footer.jsp" %>
