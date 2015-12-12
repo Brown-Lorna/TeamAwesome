@@ -133,3 +133,7 @@ input {
 .thumbnails li {
     width: 220px;
 }
+
+#messagebox {
+    position: absolute;
+}
