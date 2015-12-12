@@ -49,9 +49,9 @@
                     });
                 </script>
         </div>
-        <div id="messagebox" class="w3-container w3-quarter w3-card w3-indigo">
+        <div id="messagebox" class="w3-input-group w3-quarter w3-card w3-indigo">
             <label for="message">Message</label><br />
-            <textarea rows="10" cols="40" id="message" name="message"></textarea><br />
+            <textarea class='w3-input' style='min-height: 30px;' id="message" name="message"></textarea><br />
 
             <input type="submit" name="share" value="Share Image" />
         </div>
