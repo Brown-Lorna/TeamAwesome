@@ -62,7 +62,7 @@ public class ShareImage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get image name, the message to be posted, and the current access token code
-        int imageId    = Integer.parseInt((String)request.getSession().getAttribute("image"));
+        int imageId    = Integer.parseInt((String)request.getSession().getAttribute("imageId"));
         String message = (String)request.getSession().getAttribute("message");
         String code    = (String)request.getParameter("code");
 
@@ -84,7 +84,7 @@ public class ShareImage extends HttpServlet {
             request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
         }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("LoadImages").forward(request, response);
     }
 
     /**

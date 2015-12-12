@@ -34,6 +34,18 @@ public class LoadImages extends HttpServlet {
         DataBaseHandler dbh = DataBaseHandler.getInstance();
         List<Image> images = dbh.getImages();
         
+        Boolean imageShared = (Boolean)request.getAttribute("imageShared");
+        Boolean errorExists = (Boolean)request.getAttribute("errorExists");
+        
+        if (imageShared != null && imageShared) {
+            request.setAttribute("imageShared", true);
+        }
+        
+        if (errorExists != null && errorExists) {
+            request.setAttribute("errorExists", true);
+            request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
+        }
+        
         request.setAttribute("images", images);
         request.setAttribute("redirect", true);
         request.getRequestDispatcher("index.jsp").forward(request, response);

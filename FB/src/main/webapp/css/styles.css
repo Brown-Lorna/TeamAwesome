@@ -13,9 +13,9 @@ body {
     margin: 0;
 }
 
-div {
+#MainDiv {
     background-color: white;
-    max-width: 500px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 4px;
@@ -113,5 +113,26 @@ input {
 }
 
 .ErrorMessage {
+    text-align: center;
     color: red;
+}
+
+.Success {
+    text-align: center;
+}
+
+.image_picker_image {
+    width: 200px;
+    height: 150px;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.thumbnails li {
+    width: 220px;
 }

@@ -16,77 +16,59 @@
     <!-- TODO: Register User Form -->
     <!-- TODO: Edit Login Form -->
 
-    
-        <h1><a id="log">Login</a></h1>
 
-        <c:if test="${incorrectCredentials}">
-            <h2 id="wrongCredentials">
-                Incorrect Username or Password!
-            </h2>
+    <div id="MainDiv">
+        <c:if test="${imageShared}">
+            <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
         </c:if>
-
-        <div id="login" class="form hidden">
-
-            <form method="post" action="Login">
-                <label for="Username">Username</label>
-                <input id="Username" name="username" type="text" /> <br />
-
-                <label for="Password">Password</label>
-                <input id="Password" name="password" type="password" /> <br />
-
-                <input type="submit" value="Login" name="login" />
-            </form>
-        </div>
-
+        <c:if test="${errorExists}">
+            <h3 class="ErrorMessage">${error}</h3>
+        </c:if>
+            
+        <h1><a id="log">Share an Image to Facebook!</a></h1>
+            
         <form method="post" action="FaceBookLogin">
-            <label for="image">Image Id</label>
-            <input id="image" name="image" type="text" /> <br />
+            <input id="imageId" type="hidden" name="imageId" value="null" />
+            <select id="images">
+                <%! int count; %>
+                <% count = 1; %>
+                <c:forEach var="image" items="${images}">
+                    <option value="${image.id}" data-img-src="BytesToImage?id=${image.id}">Image <%= count%> - ${image.name}</option>
+                    <% count++; %>
+                </c:forEach>
+            </select>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message"></textarea>
+            <script>
+                var currentImage = null;
+                $("#images").imagepicker({
+                    show_label: true,
+                    initialized: function() {
+                        currentImage = $("input#imageId").first();
+                        currentImage.attr("value", this.select[0][0].attributes.value.value);
+                        console.log(this);
+                    },
+                    selected: function(option) {
+                        console.log(option);
+                        currentImage.attr("value", option.option[0].attributes.value.value);
+                    }
+                });
+            </script>
+            
+            <label for="message">Message</label><br />
+            <textarea rows="10" cols="40" id="message" name="message"></textarea><br />
 
             <input type="submit" name="share" value="Share Image" />
         </form>
-        
 
-        <c:forEach var="image" items="${images}">
-            
-            <p>
-               
-                <img src="BytesToImage?id=${image.id}" title="${image.name}" alt="${image.name}">
-                
-            </p>
-        </c:forEach>
-    
-    <!--<div>
-            <h1><a id="reg">Register</a></h1>
-            
-            <div id="register" class="form hidden">
-                
-                <form method="post" action="RegisterUser">
-                    <label for="Username2">Enter a Username</label>
-                    <input id="Username2" name="username" type="text" /> <br>
-    
-                    <label for="Password2">Enter Password</label>
-                    <input id="Password2" name="password" type="password" /> <br>
-    
-                    <label for="Password3">Confirm Password</label>
-                    <input id="Password3" name="confirm" type="password" /> <br>
-    
-                    <input type="submit" value="Register" name="register" />
-                </form>
-            </div>
-        </div>
-    -->
-
-<script>
-    $("#log").click(function (event) {
-        event.preventDefault();
-        $("#login").toggleClass("hidden");
-    });
-    $("#reg").click(function (event) {
-        event.preventDefault();
-        $("#register").toggleClass("hidden");
-    });
-</script>
+        <script>
+            $("#log").click(function (event) {
+                event.preventDefault();
+                $("#login").toggleClass("hidden");
+            });
+            $("#reg").click(function (event) {
+                event.preventDefault();
+                $("#register").toggleClass("hidden");
+            });
+        </script>
+    </div>
 <%@ include file="footer.jsp" %>

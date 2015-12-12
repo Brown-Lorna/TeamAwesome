@@ -73,9 +73,9 @@ public class FaceBookLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Get image attribute
-        String imageId = request.getParameter("image");
+        String imageId = request.getParameter("imageId");
         String message = request.getParameter("message");
-        request.getSession().setAttribute("image", imageId);
+        request.getSession().setAttribute("imageId", imageId);
         request.getSession().setAttribute("message", message);
 
         // Set up callback URL
