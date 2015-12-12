@@ -32,13 +32,13 @@ public class DisplayImages extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DataBaseHandler dbh = new DataBaseHandler();
+        // Grab the DataBaseHanlder and get all the images
+        DataBaseHandler dbh = DataBaseHandler.getInstance();
         List<Image> images = dbh.getImages();
         
-                
+        // Set up index.jsp with a list of the images
         request.setAttribute("images", images);
         request.getRequestDispatcher("index.jsp").forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

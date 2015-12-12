@@ -2,8 +2,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--(Boolean)session.getAttribute("logged")
-                    <li><a href="Logout">LOGOUT</a></li>-->
 <%!
     boolean loggedHeader = false;
 %>

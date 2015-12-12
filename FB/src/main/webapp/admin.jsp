@@ -35,7 +35,13 @@
                 <c:if test="${addedError}">
                     <h3 class="ErrorMessage">Error in uploading image!</h3>
                 </c:if>
-                <h1>Add Image</h1>
+                    <c:if test="${imageDeleted}">
+                    <h3 class="Success">Image was deleted from database!</h3>
+                </c:if>
+                <c:if test="${deletedError}">
+                    <h3 class="ErrorMessage">Cannot delete image. Permissions are incorrect.</h3>
+                </c:if>
+                <h1>Upload an Image to the Database</h1>
                 <form name="addImageForm" action="AddImage" method="post" enctype="multipart/form-data">
                     <label for="title">Title of Image</label>
                     <input type="text" name="title" id="title" /><br />
@@ -43,12 +49,36 @@
                     <label for="image">Choose an image</label>
                     <input type="file" name="image" accept="image/*" /><br />
 
-                    <input name="submit" type="submit" value="Add Image">
+                    <input name="submit" type="submit" value="Upload Image">
                 </form>
                 <c:if test="<%= userType == 0%>">
-                    <h1>Delete Image</h1>
-                    <form name="deleteImageForm" action="" method="post">
+                    <h1>Delete an Image to the Database</h1>
+                    <form name="deleteImageForm" action="DeleteImage" method="post">
+                        <input id="imageId" type="hidden" name="imageId" value="null" />
+                        <select id="images">
+                            <%! int count; %>
+                            <% count = 1; %>
+                            <c:forEach var="image" items="${images}">
+                                <option value="${image.id}" data-img-src="BytesToImage?id=${image.id}">Image <%= count%> - ${image.name}</option>
+                                <% count++; %>
+                            </c:forEach>
+                        </select>
+
+                        <script>
+                            var currentImage = null;
+                            $("#images").imagepicker({
+                                show_label: true,
+                                initialized: function() {
+                                    currentImage = $("input#imageId").first();
+                                    currentImage.attr("value", this.select[0][0].attributes.value.value);
+                                },
+                                selected: function(option) {
+                                    currentImage.attr("value", option.option[0].attributes.value.value);
+                                }
+                            });
+                        </script>
                         
+                        <input type="submit" name="delete" value="Delete Image" />
                     </form>
                 </c:if>
             </c:when>

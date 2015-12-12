@@ -6,16 +6,11 @@
     session.setAttribute("indexClass", "CurrentPage");
     session.setAttribute("adminClass", "Page");
 %>
-<%! String title = "Greetably";%>
+<%! String title = "Greetably - Share a season's gretting to Facebook!";%>
 <%@ include file="header.jsp" %>
     <c:if test="${empty redirect}">
-        <script>
-            location.href = "LoadImages";
-        </script>
+        <script> location.href = "LoadImages"; </script>
     </c:if>
-    <!-- TODO: Register User Form -->
-    <!-- TODO: Edit Login Form -->
-
 
     <div id="MainDiv">
         <c:if test="${imageShared}">
@@ -45,10 +40,8 @@
                     initialized: function() {
                         currentImage = $("input#imageId").first();
                         currentImage.attr("value", this.select[0][0].attributes.value.value);
-                        console.log(this);
                     },
                     selected: function(option) {
-                        console.log(option);
                         currentImage.attr("value", option.option[0].attributes.value.value);
                     }
                 });

@@ -31,8 +31,12 @@ public class Logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Remove user related attributes from session
+        request.getSession().removeAttribute("userType");
         request.getSession().removeAttribute("username");
         request.getSession().removeAttribute("logged");
+        
+        // Go to index.jsp
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

@@ -73,10 +73,23 @@ public class DeleteImage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO: Create DataBase Handler (DBH)
-
-        // TODO: Add a user to DB using addUser in DBH.
-        // TODO: Any failure should redirect to index.jsp, with error message
-        // TODO: Redirect to welcome.jsp
+        DataBaseHandler dbh = DataBaseHandler.getInstance();
+        
+        int imageId = Integer.parseInt(request.getParameter("imageId"));
+        String username = (String)request.getSession().getAttribute("username");
+        boolean logged  = (Boolean)request.getSession().getAttribute("logged");
+        int userType    = (Integer)request.getSession().getAttribute("userType");
+        
+        User user = dbh.getUser(username);
+        
+        if (user != null && logged && userType == 0) {
+            dbh.deleteImage(imageId);
+            request.setAttribute("imageDeleted", true);
+        } else {
+            request.setAttribute("deletedError", true);
+        }
+        
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
     /**

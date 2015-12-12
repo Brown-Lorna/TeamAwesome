@@ -72,19 +72,27 @@ public class AddImage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Get the DataBaseHandler
         DataBaseHandler dbh = DataBaseHandler.getInstance();
+        
+        // Get information about the user currently logged in
         boolean logged = (boolean) request.getSession().getAttribute("logged");
         String username = (String) request.getSession().getAttribute("username");
         User user = dbh.getUser(username);
 
+        // Are we currently logged in
         if (username != null && user != null && logged) {
+            // Check to make sure the request is multipart
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {
+                    // Parse the request into FileItems
                     List<FileItem> multipart = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
                     String title = "";
                     InputStream imageInputStream = null;
 
+                    // Loop through each item
                     for (FileItem item : multipart) {
+                        // Are we dealing with a file or something different
                         if (!item.isFormField()) {
                             if (item.getFieldName().equals("image")) {
                                 imageInputStream = item.getInputStream();
@@ -96,9 +104,12 @@ public class AddImage extends HttpServlet {
                         }
                     }
 
+                    // Was there a title? If not, give a fake title
                     if (title.equals("")) {
                         title = "No title";
                     }
+                    
+                    // Set up the image and add to the DataBase.
                     Image image = new Image(title, imageInputStream);
                     dbh.addImage(image, user);
                 } catch (FileUploadException ex) {
@@ -106,23 +117,13 @@ public class AddImage extends HttpServlet {
                 }
             }
         } else {
+            // Was there an error?
             request.setAttribute("errorExists", true);
             request.setAttribute("error", "Not logged in. Cannot upload an image.");
         }
+        
+        // Go to admin.jsp
         request.getRequestDispatcher("admin.jsp").forward(request, response);
-    }
-
-    private String getValue(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-
-        System.out.println(part.toString());
-        String[] tokens = contentDisp.split(";");
-        for (String token : tokens) {
-            if (token.trim().startsWith("filename")) {
-                return token.substring(token.indexOf("=") + 2, token.length() - 1);
-            }
-        }
-        return "";
     }
 
     /**

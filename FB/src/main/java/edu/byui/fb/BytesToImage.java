@@ -6,8 +6,6 @@
 package edu.byui.fb;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,12 +32,21 @@ public class BytesToImage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Set as an image
         response.setContentType("image/jpeg");
+        
+        // Get the id of the image
         String idstr = request.getParameter("id");
         int id = Integer.parseInt(idstr);
-        DataBaseHandler dbh = new DataBaseHandler();
+        
+        // Get the image given its id
+        DataBaseHandler dbh = DataBaseHandler.getInstance();
         Image image = dbh.getImage(id);
+        
+        // Get the InputStream of the image and convert to bytes
         byte[] ba = IOUtils.toByteArray(image.getBytes());
+        
+        // Write bytes to screen
         response.getOutputStream().write(ba);
     }
 

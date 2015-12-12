@@ -52,9 +52,6 @@ input {
 }
 
 #NavBar {
-    /*display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;*/
     font-size: 20px;
     text-shadow: 3px 2px 3px #333333;
     background-color: #3B5998;
@@ -73,7 +70,7 @@ input {
     margin-right: auto;
     margin-top: 0px;
     margin-bottom: 0px;
-    padding: 15px;
+    padding: 15px 0px;
     color: white;
     width: 100%;
     position: absolute;

@@ -31,21 +31,26 @@ public class LoadImages extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Grab the database and get all the images from database
         DataBaseHandler dbh = DataBaseHandler.getInstance();
         List<Image> images = dbh.getImages();
         
+        // Get attributes about an image being shared and errors
         Boolean imageShared = (Boolean)request.getAttribute("imageShared");
         Boolean errorExists = (Boolean)request.getAttribute("errorExists");
         
+        // Check if the imageShared exists
         if (imageShared != null && imageShared) {
             request.setAttribute("imageShared", true);
         }
         
+        // Check if the errorExists exists
         if (errorExists != null && errorExists) {
             request.setAttribute("errorExists", true);
             request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
         }
         
+        // Set the images list and tell index.jsp not to redirect back here.
         request.setAttribute("images", images);
         request.setAttribute("redirect", true);
         request.getRequestDispatcher("index.jsp").forward(request, response);

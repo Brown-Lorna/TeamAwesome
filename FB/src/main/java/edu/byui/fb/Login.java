@@ -71,21 +71,29 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Get the database
         DataBaseHandler dbh = DataBaseHandler.getInstance();
+        
+        // Get the inputted username and password
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        // Get user information in the database
         User user = dbh.getUser(username);
         
+        // Check if user exists and that the password was correct
         if (user != null && password.equals(user.getPassword())) {
+            // Log user in, set the username, and the userType
             request.getSession().setAttribute("logged", true);
             request.getSession().setAttribute("username", user.getUsername());
             request.getSession().setAttribute("userType", user.getUserType());
         } else {
+            // Tell admin.jsp that there was an error and give the message
             request.setAttribute("errorExists", true);
             request.setAttribute("error", "Username/Password is incorrect");
         }
         
+        // Go to admin.jsp
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 
