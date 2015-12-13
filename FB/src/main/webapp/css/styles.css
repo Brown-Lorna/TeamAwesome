@@ -139,7 +139,7 @@ input[type=submit], textarea {
 
 .tabs {
     position: relative;   
-    min-height: 200px;
+    min-height: 400px;
     clear: both;
     margin: 25px 0;
 }
@@ -169,7 +169,8 @@ input[type=submit], textarea {
     right: 0;
     bottom: 0;
     padding: 20px;
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
+    overflow-y: scroll;
 }
 
 [type=radio]:checked ~ label {
@@ -180,4 +181,10 @@ input[type=submit], textarea {
 
 [type=radio]:checked ~ label ~ .content {
     z-index: 1;
+}
+
+.flexImages {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
