@@ -13,7 +13,6 @@
 </c:if>
 
 <div id='MainDiv'>
-
     <c:if test="${imageShared}">
         <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
     </c:if>
@@ -72,6 +71,4 @@
             $("#register").toggleClass("hidden");
         });
     </script>
-
-</div>
 <%@ include file="footer.jsp" %>
