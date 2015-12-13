@@ -27,12 +27,6 @@ h1, p {
     text-align: center;
 }
 
-#wrongCredentials {
-    text-align: center;
-    color: red;
-    font-weight: bold;
-}
-
 form {
     text-align: center;
 }
@@ -79,7 +73,7 @@ input[type=submit], textarea {
     margin-right: auto;
     margin-top: 0px;
     margin-bottom: 0px;
-    padding: 5px 0px;
+    padding: 0px;
     color: white;
     width: 100%;
     position: absolute;
@@ -115,7 +109,7 @@ input[type=submit], textarea {
 }
 
 .Page {
-    
+
 }
 
 .ErrorMessage {
@@ -141,4 +135,49 @@ input[type=submit], textarea {
 
 .thumbnails li {
     width: 220px;
+}
+
+.tabs {
+    position: relative;   
+    min-height: 200px;
+    clear: both;
+    margin: 25px 0;
+}
+
+.tab {
+    float: left;
+}
+
+.tab label {
+    background: #eee; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    margin-left: -1px; 
+    position: relative;
+    left: 1px; 
+}
+
+.tab [type=radio] {
+    display: none;   
+}
+
+.content {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background: white;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc; 
+}
+
+[type=radio]:checked ~ label {
+    background: white;
+    border-bottom: 1px solid white;
+    z-index: 2;
+}
+
+[type=radio]:checked ~ label ~ .content {
+    z-index: 1;
 }

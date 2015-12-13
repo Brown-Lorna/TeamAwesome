@@ -54,10 +54,10 @@
                     <form name="addImageForm" action="AddImage" method="post" enctype="multipart/form-data">
 
                         <label for="image">Choose an image</label>
-                        <input type="file" name="image" accept="image/*" /><br />
+                        <input type="file" name="image" accept="image/*" required/><br />
 
                         <label for="title">Title of image</label>
-                        <input type="text" name="title" id="title" /><br />
+                        <input type="text" name="title" id="title" required/><br />
 
                         <input name="submit" type="submit" value="Upload Image">
                     </form>
@@ -115,9 +115,9 @@
                     <br />
                     <form name="logForm" action="Login" method="post">
                         <label for="username">Username</label>
-                        <input name="username" id="username" type="text" /><br />
+                        <input name="username" id="username" type="text" required/><br />
                         <label for="password">Password</label>
-                        <input name="password" id="password" type="password" /><br />
+                        <input name="password" id="password" type="password" required/><br />
 
                         <input name="submit" type="submit" value="Login" />
                     </form>
