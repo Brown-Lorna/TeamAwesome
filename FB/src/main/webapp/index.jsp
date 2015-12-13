@@ -72,4 +72,5 @@
             $("#register").toggleClass("hidden");
         });
     </script>
+</div>
 <%@ include file="footer.jsp" %>
