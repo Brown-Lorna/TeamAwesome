@@ -66,7 +66,7 @@
                     <li>You may optionally write a message in the text box provided.</li>
                     <li>Click on the "Share Image to Facebook" button.</li>
                     <img src="img/shareImage.png" alt="Share Image" style="height:200px;" />
-                    <li>Log into the test user Facebook using the credentials provided on the lesson 13.2-Weekly Developer Forum.</li>
+                    <li>Log into the test user Facebook using the credentials provided on the lesson 14.2-Weekly Developer Forum.</li>
                     <img src="img/facebookLogin.png" alt="Share Image" style="height:200px;" />
                     <li>You are done! Your image and message are now shared.</li>
                     <li>If you wish, check your Facebook page to see the image!</li>
@@ -83,7 +83,7 @@
                 CS 313 students have additional privileges:
                 <ol>
                     <li>Navigate to the admin page.</li>
-                    <li>Login using the credentials given on the lesson 13.2-Weekly Developer Forum.</li>
+                    <li>Login using the credentials given on the lesson 43.2-Weekly Developer Forum.</li>
                     <img src="img/login.png" alt="Share Image" style="height:200px;" />
                     <li>Now you may add an image to the database!</li>
                     <li>Click the button to browse for an image.</li>
