@@ -7,7 +7,7 @@ package edu.byui.fb;
 
 /**
  *
- * @author Grant
+ * @author TeamAwesome
  */
 public class User {
     private String username;

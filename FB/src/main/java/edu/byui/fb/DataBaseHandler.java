@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DataBaseHandler {
+
     // There must only exist one!
     private static final DataBaseHandler DBH_INSTANCE = new DataBaseHandler();
 
@@ -37,38 +38,38 @@ public class DataBaseHandler {
     }
 
     /**
-     * getInstance
-     *     Use this to get the only existing database.
-     * @return 
+     * getInstance Use this to get the only existing database.
+     *
+     * @return
      */
     public static DataBaseHandler getInstance() {
         return DBH_INSTANCE;
     }
 
     /**
-     * addImage
-     *     Adds and image to the database.
+     * addImage Adds and image to the database.
+     *
      * @param image
-     * @param user 
+     * @param user
      */
     public void addImage(Image image, User user) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         try {
             // Connect
             conn = DriverManager.getConnection(DB_URL, username, password);
-            
+
             // Set up statement
             String sql = "INSERT INTO images (image, title, user_id) VALUES (?, ?, ?);";
             stmt = conn.prepareStatement(sql);
-            
+
             // Add in the parameters
             stmt.setBlob(1, image.getBytes());
             stmt.setString(2, image.getName());
             stmt.setInt(3, user.getId());
-            
+
             // Execute the statement
             stmt.execute();
         } catch (SQLException ex) {
@@ -88,10 +89,10 @@ public class DataBaseHandler {
     }
 
     /**
-     * getImage
-     *     Get an image from the database given an id.
+     * getImage Get an image from the database given an id.
+     *
      * @param id
-     * @return 
+     * @return
      */
     public Image getImage(int id) {
         Connection conn = null;
@@ -102,14 +103,14 @@ public class DataBaseHandler {
         try {
             // Connect
             conn = DriverManager.getConnection(DB_URL, username, password);
-            
+
             // Prepare statement
             stmt = conn.createStatement();
             String sql = "SELECT * FROM images WHERE id = " + id + " LIMIT 1;";
-            
+
             // Execute Query statement
             rs = stmt.executeQuery(sql);
-            
+
             // Get information about the image.
             rs.next();
             image.setName(rs.getString("title"));
@@ -134,9 +135,9 @@ public class DataBaseHandler {
     }
 
     /**
-     * getImages
-     *     Get all images in database
-     * @return 
+     * getImages Get all images in database
+     *
+     * @return
      */
     public List getImages() {
         Connection conn = null;
@@ -144,18 +145,22 @@ public class DataBaseHandler {
         String sql = null;
         ResultSet rs = null;
         List<Image> images = new ArrayList<>();
-        
+
         try {
             // Connect
             conn = DriverManager.getConnection(DB_URL, username, password);
-            
+
+            /**
+             *
+             * @author TeamAwesome
+             */
             // Prepare statement
             stmt = conn.createStatement();
             sql = "SELECT * FROM images;";
-            
+
             // Execute statement
             rs = stmt.executeQuery(sql);
-            
+
             // Go through each result set and set information
             while (rs.next()) {
                 Image image = new Image();
@@ -191,22 +196,22 @@ public class DataBaseHandler {
     }
 
     /**
-     * deleteImage
-     *     Delete an image given some id.
-     * @param imageId 
+     * deleteImage Delete an image given some id.
+     *
+     * @param imageId
      */
     public void deleteImage(int imageId) {
         Connection conn = null;
         Statement stmt = null;
         String sql = "DELETE FROM images WHERE id = " + imageId;
-        
+
         try {
             // Connect
             conn = DriverManager.getConnection(DB_URL, username, password);
-            
+
             // Prepare statement
             stmt = conn.createStatement();
-            
+
             // Execute statement
             stmt.execute(sql);
         } catch (SQLException ex) {
@@ -229,12 +234,12 @@ public class DataBaseHandler {
             }
         }
     }
-    
+
     /**
-     * getUser
-     *     Get a user from the database given a username
+     * getUser Get a user from the database given a username
+     *
      * @param user_name
-     * @return 
+     * @return
      */
     public User getUser(String user_name) {
         Connection conn = null;
@@ -245,17 +250,17 @@ public class DataBaseHandler {
         try {
             // Connect
             conn = DriverManager.getConnection(DB_URL, username, password);
-            
+
             // Prepare statement
             stmt = conn.createStatement();
             String sql = "SELECT * FROM users WHERE user_name = '" + user_name + "' LIMIT 1;";
-            
+
             // Execute
             rs = stmt.executeQuery(sql);
-            
+
             // Get the result
             rs.next();
-            
+
             // Set the information
             user.setUsername(rs.getString("user_name"));
             user.setId(rs.getInt("user_id"));
