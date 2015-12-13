@@ -22,6 +22,7 @@
         <script type="text/javascript" src="js/image-picker.min.js" ></script>
     </head>
     <body>
+        <img src="img/christmas-bow.png" style="position: absolute; top: 0; left: 0; width: 200px;" />
         <nav id="NavBar">
             <h1 style="font-family: 'Colonna MT', serif; font-weight: normal;">
                 <a href="index.jsp"><span style='font-size: 50px;'>G</span>REETABLY</a></h1>

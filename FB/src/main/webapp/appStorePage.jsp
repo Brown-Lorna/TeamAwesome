@@ -40,13 +40,14 @@
                     in on the holiday spirit!</h3>
                 <div style="margin-left: 20px;">
                     <ul style="list-style-type: circle;">
-                        <li>Free</li>
+                        <li>Free!</li>
                         <li>Suitable for Everyone</li>
                         <li>No need to download anything</li>
                         <li>Easy place to find beautiful holiday greetings</li>
                         <li>Easy to share with your friends</li>
                     </ul>
                 </div>
+                <image src="img/holly-and-berries.png" alt="Greetably Logo"  style="width:200px;float:right;">
             </div> 
         </div>
 

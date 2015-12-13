@@ -139,7 +139,7 @@ input[type=submit], textarea {
 
 .tabs {
     position: relative;   
-    min-height: 400px;
+    min-height: 500px;
     clear: both;
     margin: 25px 0;
 }
