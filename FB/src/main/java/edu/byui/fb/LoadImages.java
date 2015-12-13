@@ -42,6 +42,7 @@ public class LoadImages extends HttpServlet {
         Boolean deletedError = (Boolean)request.getAttribute("deletedError");
         Boolean imageAdded   = (Boolean)request.getAttribute("imageAdded");
         Boolean addedError   = (Boolean)request.getAttribute("addedError");
+        String error         = (String)request.getAttribute("error");
         
         // Check if the imageShared exists
         if (imageShared != null && imageShared) {
@@ -51,7 +52,7 @@ public class LoadImages extends HttpServlet {
         // Check if the errorExists exists
         if (errorExists != null && errorExists) {
             request.setAttribute("errorExists", true);
-            request.setAttribute("error", "Could not post your message to your FaceBook timeline.");
+            request.setAttribute("error", error);
         }
         
         // Check if the imageDeleted exists

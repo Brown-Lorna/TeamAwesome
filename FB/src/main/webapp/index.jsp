@@ -13,18 +13,20 @@
     <script> location.href = "LoadImages?dest=index.jsp";</script>
 </c:if>
 
-<div class='w3-row' style="max-width: 1200px;">
-    <div class="w3-container">
-        <div class="w3-container" style="width: 75%;">
-            <c:if test="${imageShared}">
-                <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
-            </c:if>
-            <c:if test="${errorExists}">
-                <h3 class="ErrorMessage">${error}</h3>
-            </c:if>
+<div id='MainDiv'>
+    <c:if test="${imageShared}">
+        <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
+    </c:if>
+    <c:if test="${errorExists}">
+        <h3 class="ErrorMessage">${error}</h3>
+    </c:if>
 
+    <div class="w3-card-4">
+        <header class="w3-container w3-theme">
             <h1><a id="log">Share an Image to Facebook!</a></h1>
-
+        </header>
+        <div class="w3-container">
+            <br />
             <form method="post" action="FaceBookLogin">
                 <input id="imageId" type="hidden" name="imageId" value="null" />
                 <select id="images">
@@ -49,25 +51,25 @@
                         }
                     });
                 </script>
-        </div>
-        <div id="messagebox" class="w3-input-group w3-quarter w3-card w3-indigo">
-            <label for="message">Message</label><br />
-            <textarea class='w3-input' style='min-height: 30px;' id="message" name="message"></textarea><br />
 
-            <input type="submit" name="share" value="Share Image to Facebook" />
-        </div>
-        </form>
+                <div id="messagebox" >
+                    <label for="message">Message</label><br />
+                    <textarea cols='40' rows="10" id="message" name="message"></textarea><br />
 
-        <script>
-            $("#log").click(function (event) {
-                event.preventDefault();
-                $("#login").toggleClass("hidden");
-            });
-            $("#reg").click(function (event) {
-                event.preventDefault();
-                $("#register").toggleClass("hidden");
-            });
-        </script>
+                    <input type="submit" name="share" value="Share Image to Facebook" />
+                </div>
+            </form>
+            <br />
+        </div>
     </div>
-</div>
+    <script>
+        $("#log").click(function (event) {
+            event.preventDefault();
+            $("#login").toggleClass("hidden");
+        });
+        $("#reg").click(function (event) {
+            event.preventDefault();
+            $("#register").toggleClass("hidden");
+        });
+    </script>
 <%@ include file="footer.jsp" %>
