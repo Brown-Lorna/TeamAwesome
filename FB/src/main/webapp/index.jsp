@@ -13,16 +13,20 @@
 </c:if>
 
 <div id='MainDiv'>
-    
-            <c:if test="${imageShared}">
-                <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
-            </c:if>
-            <c:if test="${errorExists}">
-                <h3 class="ErrorMessage">${error}</h3>
-            </c:if>
 
+    <c:if test="${imageShared}">
+        <h3 class="Success">Image was successfully shared to your Facebook timeline!</h3>
+    </c:if>
+    <c:if test="${errorExists}">
+        <h3 class="ErrorMessage">${error}</h3>
+    </c:if>
+
+    <div class="w3-card-4">
+        <header class="w3-container w3-theme">
             <h1><a id="log">Share an Image to Facebook!</a></h1>
-
+        </header>
+        <div class="w3-container">
+            <br />
             <form method="post" action="FaceBookLogin">
                 <input id="imageId" type="hidden" name="imageId" value="null" />
                 <select id="images">
@@ -47,25 +51,27 @@
                         }
                     });
                 </script>
-        
-        <div id="messagebox" >
-            <label for="message">Message</label><br />
-            <textarea cols='40' rows="10" id="message" name="message"></textarea><br />
 
-            <input type="submit" name="share" value="Share Image to Facebook" />
+                <div id="messagebox" >
+                    <label for="message">Message</label><br />
+                    <textarea cols='40' rows="10" id="message" name="message"></textarea><br />
+
+                    <input type="submit" name="share" value="Share Image to Facebook" />
+                </div>
+            </form>
+            <br />
         </div>
-        </form>
+    </div>
+    <script>
+        $("#log").click(function (event) {
+            event.preventDefault();
+            $("#login").toggleClass("hidden");
+        });
+        $("#reg").click(function (event) {
+            event.preventDefault();
+            $("#register").toggleClass("hidden");
+        });
+    </script>
 
-        <script>
-            $("#log").click(function (event) {
-                event.preventDefault();
-                $("#login").toggleClass("hidden");
-            });
-            $("#reg").click(function (event) {
-                event.preventDefault();
-                $("#register").toggleClass("hidden");
-            });
-        </script>
-    
 </div>
 <%@ include file="footer.jsp" %>

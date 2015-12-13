@@ -34,9 +34,6 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Do we need to do anything here?
-        String correctName = "";
-        String correctPass = "";
 
     }
 
@@ -89,7 +86,7 @@ public class Login extends HttpServlet {
         }
         
         // Go to admin.jsp
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        request.getRequestDispatcher("LoadImages?dest=admin.jsp").forward(request, response);
     }
 
     /**
